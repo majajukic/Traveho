@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "sart": "nodemon index.js"
+    "start": "nodemon index.js"
   },
   "keywords": [],
   "author": "Maja Jukic <mjukic2000@gmail.com>",
