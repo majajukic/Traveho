@@ -1,16 +1,14 @@
 import React from 'react';
-import {Container, AppBar, Typography, Grow, Grid} from '@material-ui/core';
-import traveho from './images/polaroid.png';
+import {Container, Grow, Grid,} from '@material-ui/core';
 import Posts from './components/Posts/Posts.js';
 import Form from './components/Form/Form.js';
+import Header from './components/Header/Header.js';
+import useStyles from './components/Header/styles.js';
 
 const App = () => {
     return(
         <Container maxidth="lg">
-            <AppBar position="static" color="inherit">
-                <Typography variant="h2" align="center">Traveho</Typography>
-                <img src={traveho} alt="traveho" height="960"/>
-            </AppBar>
+          <Header/>
             <Grow in>
                 <Container>
                     <Grid container justify="space-between" alignItems="stretch" spacing={3}>
