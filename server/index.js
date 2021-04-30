@@ -5,11 +5,10 @@ import postRoutes from './routes/posts.js';
 
 const app = express();
 
-app.use('/posts', postRoutes);//every route with postRoutes is going to start with 'posts'
-
 app.use(express.json({limit: "30mb", extended: true}))//limit for images.
 app.use(express.urlencoded({extended: true}));
-app.use(cors());
+app.use(cors());//this has to go above the routes.
+app.use('/posts', postRoutes);//every route with postRoutes is going to start with 'posts'.
 
 //Connection to the database:
 const CONNECTION_URL = 'mongodb+srv://majajukic:majajukic111@cluster0.4ask5.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
