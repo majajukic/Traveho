@@ -24,7 +24,12 @@ const Form = () => {
     }
 
     const clear = () => {
-
+        setPostData(
+        postData.creator='',
+        postData.title='',
+        postData.massage='',
+        postData.tags='',
+        );
     }
 
     return(
