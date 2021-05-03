@@ -8,7 +8,7 @@ export default makeStyles((theme) => ({
   },
   paper: {
     padding: theme.spacing(2),
-    marginTop:90
+    marginTop:100
   },
   form: {
     display: 'flex',
@@ -25,6 +25,6 @@ export default makeStyles((theme) => ({
     backgroundColor:'#3f51b5'
   },
   buttonClear: {
-    backgroundColor:'#FF5018'
+    backgroundColor:'#7c5ee0'
   }
 }));
