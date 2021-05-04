@@ -3,7 +3,7 @@ import {TextField, Button, Typography, Paper} from '@material-ui/core';
 import FileBase from 'react-file-base64';
 import useStyles from './styles.js';
 import {useDispatch} from 'react-redux';
-import {createPost} from '../../actions/posts.js';
+import {createPost} from '../../actions/posts.js'
 
 const Form = () => {
     const classes = useStyles();

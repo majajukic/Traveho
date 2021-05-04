@@ -5,6 +5,8 @@ export default (posts = [], action) => {
             return action.payload;//our actual posts.
         case 'CREATE':
             return [...posts, action.payload];//first we spread the posts,so we dont override previous data.
+        case 'DELETE':
+            return posts.filter((post) => post._id !== action.payload);
         default:
             return posts;
     }
