@@ -7,12 +7,22 @@ import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import moment from 'moment';
 import Posts from '../Posts.js';
 import {useDispatch} from 'react-redux';
-import {deletePost} from '../../../actions/posts.js';
+import {deletePost, likePost} from '../../../actions/posts.js';
 
 
 const Post = ({post}) => {
     const classes = useStyles();
     const dispatch = useDispatch();
+
+    const handleClickDelete = () => {
+        if(window.confirm('Are you sure you want to delete this item?'))
+            dispatch(deletePost(post._id));
+
+    }
+
+    const handleClickLike = () => {
+        dispatch(likePost(post._id));
+    }
 
     return(
         <Card className={classes.card}>
@@ -33,10 +43,10 @@ const Post = ({post}) => {
             <Typography className={classes.title} variant="h5" gutterBottom>{post.message}</Typography>
             </CardContent>
             <CardActions className={classes.cardActions}>
-                <Button size="small" color="primary" onClick={() => {}}>
-                    <ThumbUpAltIcon fontSize="large">{post.likeCount}</ThumbUpAltIcon>
+                <Button size="small" color="primary" onClick={handleClickLike}>
+                    <ThumbUpAltIcon fontSize="large" />{post.likeCount}
                 </Button>
-                <Button size="small" color="primary" onClick={() => dispatch(deletePost(post._id))}>
+                <Button size="small" color="primary" onClick={handleClickDelete}>
                     <DeleteIcon fontSize="large" />
                 </Button>
             </CardActions>
