@@ -3,3 +3,13 @@ body {
     background-image: url("https://www.transparenttextures.com/patterns/candyhole.png");
     /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
 }
+
+input[type="file"] {
+    width: 100%;
+    color: transparent;
+}
+
+input[type="file"]:hover {
+    cursor: pointer;
+    /* box-shadow: 2px 2px gainsboro; */
+}

@@ -18,6 +18,11 @@ export default makeStyles((theme) => ({
   fileInput: {
     width: '97%',
     margin: '20px 0',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: '6px 12px',
   },
   buttonSubmit: {
     marginBottom: 10,
@@ -26,5 +31,13 @@ export default makeStyles((theme) => ({
   },
   buttonClear: {
     backgroundColor:'#7c5ee0'
+  },
+  previewImage: {
+    padding: 1,
+    width: '100%',
+    maxHeight: 100,
+    borderRadius: 5,
+    objectFit: 'cover',
+    objectPosition: '50% 50%',
   }
 }));
