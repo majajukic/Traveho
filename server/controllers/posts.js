@@ -50,3 +50,15 @@ export const likePost = async (req, res) => {
 
     res.json(updatedPost);
 }
+
+export const updatePost = async (req, res) => {
+    //expl. /posts/123, 123 is an id in the route and it gets automatically placed in this variable below.
+    const {id: _id} = req.params;//renaming to _id
+    const post = req.body;//sent from frontend (changed data)
+
+    if(!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send('No post with that id.');
+
+    const updatedPost = await PostMessage.findByIdAndUpdate(_id, {...post, _id}, {new: true});
+
+    res.json(updatedPost);
+}
