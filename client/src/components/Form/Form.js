@@ -20,6 +20,8 @@ const Form = ({currentId, setCurrentId}) => {
     selectedFile: "",
   });
 
+  const [errors, setErrors] = useState({});
+
   //filling up the form with data of the post we want to edit:
   useEffect(() => {
     if(post) {
@@ -29,14 +31,38 @@ const Form = ({currentId, setCurrentId}) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    //if a post is choosen to be edited...
-    if(currentId) {
-      dispatch(updatePost(currentId, postData));
-    } else {
-      dispatch(createPost(postData));
+
+    if(validate()) {
+      //if a post is choosen to be edited...
+      if(currentId) {
+        dispatch(updatePost(currentId, postData));
+      } else {
+        dispatch(createPost(postData));
+      }
+      clear();
     }
-    clear();
-  };
+  }
+
+  /*const handleDone = (base64) => {
+    if(postData.selectedFile) {
+      setPostData({ ...postData, selectedFile: base64 });
+    } else {
+      setPostData({...postData, selectedFile: defaultImage});
+    }
+  }*/
+
+  //validation function:
+  const validate = () => {
+    const temp = {};
+    temp.creator = postData.creator ? "" : "This field is required";
+    temp.title = postData.title ? "" : "This field is required";
+    temp.message = postData.message ? "" : "This field is required";
+    setErrors({
+      ...temp
+    });
+
+    return Object.values(temp).every(x => x =="");//every() da li svi elementi niza zadovoljavaju validaciju.
+  }
 
   const clear = () => {
     setCurrentId(null);
@@ -47,15 +73,16 @@ const Form = ({currentId, setCurrentId}) => {
       tags: "",
       selectedFile: "",
     });
+    setErrors({});
   };
 
   return (
     <Paper className={classes.paper}>
-      <form autoComplete="off" noValidate className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
+      <form autoComplete="off" className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
         <Typography variant="h6">{currentId ? "Edit" : "Share"} your trip</Typography>
-        <TextField name="creator" variant="outlined" label="Creator" fullWidth value={postData.creator || ""} onChange={(e) => setPostData({ ...postData, creator: e.target.value })}/>
-        <TextField name="title" variant="outlined" label="Title" fullWidth value={postData.title || ""} onChange={(e) => setPostData({ ...postData, title: e.target.value })}/>
-        <TextField name="message" variant="outlined" label="Message" fullWidth multiline value={postData.message || ""} onChange={(e) => setPostData({ ...postData, message: e.target.value })}/>
+        <TextField name="creator" variant="outlined" label="Creator" fullWidth error={errors.creator} helperText={errors.creator} value={postData.creator || ""} onChange={(e) => setPostData({ ...postData, creator: e.target.value })}/>
+        <TextField name="title" variant="outlined" label="Title" fullWidth error={errors.title} helperText={errors.title} value={postData.title || ""} onChange={(e) => setPostData({ ...postData, title: e.target.value })}/>
+        <TextField name="message" variant="outlined" label="Message" fullWidth error={errors.message} helperText={errors.message} multiline value={postData.message || ""} onChange={(e) => setPostData({ ...postData, message: e.target.value })}/>
         <TextField name="tags" variant="outlined" label="Tags" fullWidth value={postData.tags || ""} onChange={(e) => setPostData({ ...postData, tags: e.target.value.split(',') })}/>
         <div className={classes.fileInput}>
           <FileBase
