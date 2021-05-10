@@ -35,7 +35,7 @@ const App = () => {
             </Grow>
         </Container>
         <BottomNavigation style={{backgroundColor:"#c2affd", justifyContent:"center", paddingTop:20, marginTop:50}} showLabels>
-            <BottomNavigationAction label="&copy; Traveho 2021" variant="body1" style={{color: 'white'}} />    
+            <BottomNavigationAction label="&copy; Traveho 2021" style={{color: 'white'}} />    
         </BottomNavigation>
         </>
     );
