@@ -4,7 +4,7 @@ import FileBase from "react-file-base64";
 import useStyles from "./styles.js";
 import { useDispatch, useSelector } from "react-redux";
 import { createPost, updatePost } from "../../actions/posts.js";
-import defaultImage from "../../images/defaultImage.jpg";
+import {defaultImage} from "../../const/defaultImage";
 
 const Form = ({currentId, setCurrentId}) => {
   const classes = useStyles();
@@ -16,7 +16,7 @@ const Form = ({currentId, setCurrentId}) => {
   const [postData, setPostData] = useState({
     creator: "",
     title: "",
-    massage: "",
+    message: "",
     tags: "",
     selectedFile: "",
   });
@@ -30,7 +30,7 @@ const Form = ({currentId, setCurrentId}) => {
     }
   }, [post])
 
-  const handleSubmit = (e, base64) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     if(validate()) {
@@ -38,18 +38,19 @@ const Form = ({currentId, setCurrentId}) => {
       if(currentId) {
         dispatch(updatePost(currentId, postData));
       } else {
-        dispatch(createPost(postData));
+        if (!postData.selectedFile) {
+          postData.selectedFile = defaultImage;
+          
+          dispatch(createPost(postData));
+        }
+        else {
+          dispatch(createPost(postData));
+        }
       }
       clear();
     }
-
-    /*if(postData.selectedFile) {
-      setPostData({ ...postData, selectedFile: base64 });
-     } else {
-      setPostData({...postData, selectedFile: defaultImage});
-     }*/
-    
   }
+
 
   //validation function:
   const validate = () => {
@@ -69,7 +70,7 @@ const Form = ({currentId, setCurrentId}) => {
     setPostData({
       creator: "",
       title: "",
-      massage: "",
+      message: "",
       tags: "",
       selectedFile: "",
     });

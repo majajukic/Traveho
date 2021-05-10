@@ -8,7 +8,6 @@ import moment from 'moment';
 import Posts from '../Posts.js';
 import {useDispatch} from 'react-redux';
 import {deletePost, likePost} from '../../../actions/posts.js';
-import defaultImage from '../../../images/defaultImage.jpg';
 
 const Post = ({post, setCurrentId}) => {
     const classes = useStyles();

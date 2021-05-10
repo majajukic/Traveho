@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Container, Grow, Grid, BottomNavigation, Typography} from '@material-ui/core';
+import {Container, Grow, Grid, BottomNavigation, Typography, BottomNavigationAction} from '@material-ui/core';
 import {useDispatch} from 'react-redux';//to dispatch an action - this is a hook.
 import {getPosts} from './actions/posts.js';
 import Posts from './components/Posts/Posts.js';
@@ -34,8 +34,8 @@ const App = () => {
                 </Container>
             </Grow>
         </Container>
-        <BottomNavigation style={{backgroundColor:"#c2affd", justifyContent:"center", paddingTop:20, marginTop:50}}>
-            <Typography variant="body1" style={{color:"white"}}>&copy; Traveho 2021.</Typography>
+        <BottomNavigation style={{backgroundColor:"#c2affd", justifyContent:"center", paddingTop:20, marginTop:50}} showLabels>
+            <BottomNavigationAction label="&copy; Traveho 2021" variant="body1" style={{color: 'white'}} />    
         </BottomNavigation>
         </>
     );
