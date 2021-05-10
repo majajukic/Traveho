@@ -43,11 +43,11 @@ const Form = ({currentId, setCurrentId}) => {
       clear();
     }
 
-    if(postData.selectedFile) {
+    /*if(postData.selectedFile) {
       setPostData({ ...postData, selectedFile: base64 });
      } else {
       setPostData({...postData, selectedFile: defaultImage});
-     }
+     }*/
     
   }
 

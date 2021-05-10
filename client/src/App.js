@@ -34,8 +34,8 @@ const App = () => {
                 </Container>
             </Grow>
         </Container>
-        <BottomNavigation style={{backgroundColor:"#3f51b5", justifyContent:"center", paddingTop:20, marginTop:50}}>
-            <Typography variant="h6" style={{color:"white"}}>&copy; Traveho 2021.</Typography>
+        <BottomNavigation style={{backgroundColor:"#c2affd", justifyContent:"center", paddingTop:20, marginTop:50}}>
+            <Typography variant="body1" style={{color:"white"}}>&copy; Traveho 2021.</Typography>
         </BottomNavigation>
         </>
     );
