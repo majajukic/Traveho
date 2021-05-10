@@ -1,6 +1,7 @@
 body {
     background-color: #c2affd;
     background-image: url("https://www.transparenttextures.com/patterns/candyhole.png");
+    margin: 0
     /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
 }
 /*targetus the text beside 'choose a file button' to make it invisible once the user clicks clear.*/

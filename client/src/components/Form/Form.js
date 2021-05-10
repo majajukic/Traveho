@@ -4,6 +4,7 @@ import FileBase from "react-file-base64";
 import useStyles from "./styles.js";
 import { useDispatch, useSelector } from "react-redux";
 import { createPost, updatePost } from "../../actions/posts.js";
+import defaultImage from "../../images/defaultImage.jpg";
 
 const Form = ({currentId, setCurrentId}) => {
   const classes = useStyles();
@@ -29,7 +30,7 @@ const Form = ({currentId, setCurrentId}) => {
     }
   }, [post])
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e, base64) => {
     e.preventDefault();
 
     if(validate()) {
@@ -41,15 +42,14 @@ const Form = ({currentId, setCurrentId}) => {
       }
       clear();
     }
-  }
 
-  /*const handleDone = (base64) => {
     if(postData.selectedFile) {
       setPostData({ ...postData, selectedFile: base64 });
-    } else {
+     } else {
       setPostData({...postData, selectedFile: defaultImage});
-    }
-  }*/
+     }
+    
+  }
 
   //validation function:
   const validate = () => {

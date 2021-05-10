@@ -8,7 +8,7 @@ import moment from 'moment';
 import Posts from '../Posts.js';
 import {useDispatch} from 'react-redux';
 import {deletePost, likePost} from '../../../actions/posts.js';
-
+import defaultImage from '../../../images/defaultImage.jpg';
 
 const Post = ({post, setCurrentId}) => {
     const classes = useStyles();
@@ -26,7 +26,7 @@ const Post = ({post, setCurrentId}) => {
 
     return(
         <Card className={classes.card}>
-            <CardMedia className={classes.media} image={post.selectedFile} title={post.title}/>
+            <CardMedia className={classes.media} title={post.title} image={post.selectedFile} />
             <div className={classes.overlay}>
                 <Typography variant="h6">{post.creator}</Typography>
                 <Typography variant="body2">{moment(post.createdAt).fromNow()}</Typography>
