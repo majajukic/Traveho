@@ -5,9 +5,10 @@ import {getPosts} from './actions/posts.js';
 import Posts from './components/Posts/Posts.js';
 import Form from './components/Form/Form.js';
 import Header from './components/Header/Header.js';
-//import useStyles from './components/Header/styles.js';
+import useStyles from './styles.js';
 
 const App = () => {
+    const classes = useStyles();
     //keeping track of current id for the post that is being edited - App is a parent comp. to both Form and post so it needs to be placed here.
     const [currentId, setCurrentId] = useState(null);
     //defining the dispatch:
@@ -23,7 +24,7 @@ const App = () => {
         <Container maxidth="lg">
             <Grow in>
                 <Container>
-                    <Grid container justify="space-between" alignItems="stretch" spacing={3}>
+                    <Grid className={classes.mainContainer} container justify="space-between" alignItems="stretch" spacing={3}>
                         <Grid item xs={12} sm={7}>
                             <Posts setCurrentId={setCurrentId} />
                         </Grid>
