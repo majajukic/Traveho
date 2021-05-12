@@ -3,6 +3,7 @@ import cors from 'cors';
 import mongoose from 'mongoose';
 import postRoutes from './routes/posts.js';
 
+
 const app = express();
 
 app.use(express.json({limit: "30mb", extended: true}))//limit for images.
