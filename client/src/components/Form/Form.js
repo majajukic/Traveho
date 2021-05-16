@@ -56,13 +56,16 @@ const Form = ({currentId, setCurrentId}) => {
   const validate = () => {
     const temp = {};
     temp.creator = postData.creator ? "" : "This field is required";
+    temp.creatorFailed = postData ? false : true;
     temp.title = postData.title ? "" : "This field is required";
+    temp.titleFailed = postData.title ? false : true;
     temp.message = postData.message ? "" : "This field is required";
+    temp.messageFailed = postData.message ? false : true;
     setErrors({
       ...temp
     });
 
-    return Object.values(temp).every(x => x =="");//every() da li svi elementi niza zadovoljavaju validaciju.
+    return Object.values(temp).every(x => x === "");//every() da li svi elementi niza zadovoljavaju validaciju.
   }
 
   const clear = () => {
@@ -81,9 +84,9 @@ const Form = ({currentId, setCurrentId}) => {
     <Paper className={classes.paper}>
       <form autoComplete="off" className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
         <Typography variant="h6">{currentId ? "Edit" : "Share"} your trip</Typography>
-        <TextField name="creator" variant="outlined" label="Creator" fullWidth error={errors.creator} helperText={errors.creator} value={postData.creator || ""} onChange={(e) => setPostData({ ...postData, creator: e.target.value })}/>
-        <TextField name="title" variant="outlined" label="Title" fullWidth error={errors.title} helperText={errors.title} value={postData.title || ""} onChange={(e) => setPostData({ ...postData, title: e.target.value })}/>
-        <TextField name="message" variant="outlined" label="Message" fullWidth error={errors.message} helperText={errors.message} multiline value={postData.message || ""} onChange={(e) => setPostData({ ...postData, message: e.target.value })}/>
+        <TextField name="creator" variant="outlined" label="Creator" fullWidth error={errors.creatorFailed} helperText={errors.creator} value={postData.creator || ""} onChange={(e) => setPostData({ ...postData, creator: e.target.value })}/>
+        <TextField name="title" variant="outlined" label="Title" fullWidth error={errors.titleFailed} helperText={errors.title} value={postData.title || ""} onChange={(e) => setPostData({ ...postData, title: e.target.value })}/>
+        <TextField name="message" variant="outlined" label="Message" fullWidth error={errors.messageFailed} helperText={errors.message} multiline value={postData.message || ""} onChange={(e) => setPostData({ ...postData, message: e.target.value })}/>
         <TextField name="tags" variant="outlined" label="Tags" fullWidth value={postData.tags || ""} onChange={(e) => setPostData({ ...postData, tags: e.target.value.split(',') })}/>
         <div className={classes.fileInput}>
           <FileBase

@@ -7,6 +7,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
+import {Link} from 'react-router-dom';
 
 export default function Header() {
     const classes = useStyles();
@@ -53,10 +54,9 @@ export default function Header() {
                 open={open}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleClose}>Posts</MenuItem>
-                <MenuItem onClick={handleClose}>Blog</MenuItem>
-                <MenuItem onClick={handleClose}>Pick of the week</MenuItem>
-                <MenuItem onClick={handleClose}>Log out</MenuItem>
+                <MenuItem onClick={handleClose}><Link className={classes.link} to="/">Posts</Link></MenuItem>
+                <MenuItem onClick={handleClose}><Link className={classes.link} to="/blog">Blog</Link></MenuItem>
+                {/*<MenuItem onClick={handleClose}>Log out</MenuItem>*/}
               </Menu>
             </div>
           </Toolbar>
