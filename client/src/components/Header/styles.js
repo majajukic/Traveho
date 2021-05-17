@@ -1,6 +1,5 @@
 //Styling with material-ui:
 import {makeStyles} from '@material-ui/core/styles';
-import { normalizeUnits } from 'moment';
 
 export default makeStyles((theme) => ({
         root: {

@@ -19,6 +19,7 @@ const Home = () => {
     }, [dispatch]);
     
     return (
+        <>
         <Container maxidth="lg">
         <Grow in>
             <Container>
@@ -32,7 +33,8 @@ const Home = () => {
                 </Grid>
             </Container>
         </Grow>
-    </Container>
+        </Container>
+        </>
     )
 }
 

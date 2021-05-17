@@ -1,67 +1,42 @@
-import React from 'react';
+import React, {useState} from 'react';
 import useStyles from './styles.js';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
+import {AppBar, Toolbar, Typography, Tabs, Tab} from '@material-ui/core';
 import {Link} from 'react-router-dom';
+//import DrawerMenu from '../DrawerMenu/DrawerMenu.js';
 
 export default function Header() {
+
     const classes = useStyles();
-    const [anchorEl, setAnchorEl] = React.useState(null);
-    const open = Boolean(anchorEl);
+
+    const [value, setValue] = useState(0);
+
+    function handleChange(event, newValue) {
+      setValue(newValue);
+    }
+    
+    // const [anchorEl, setAnchorEl] = React.useState(null);
+    //const open = Boolean(anchorEl);
   
-    const handleMenu = (event) => {
+    /*const handleMenu = (event) => {
       setAnchorEl(event.currentTarget);
-    };
+    };*/
   
-    const handleClose = () => {
+    /*const handleClose = () => {
       setAnchorEl(null);
-    };
+    };*/
   
     return (
       <div className={classes.root}>
         <AppBar position="fixed">
           <Toolbar>
-            <Typography variant="h5" className={classes.title}>
-              Traveho
-            </Typography>
-            <div>
-              <IconButton
-                edge="start"
-                className={classes.menuButton}
-                color="inherit"
-                aria-label="menu"
-                onClick={handleMenu}
-              >
-              <MenuIcon fontSize="large"/>
-              </IconButton>
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorEl}
-                anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "right"
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "right"
-                }}
-                open={open}
-                onClose={handleClose}
-              >
-                <MenuItem onClick={handleClose}><Link className={classes.link} to="/">Posts</Link></MenuItem>
-                <MenuItem onClick={handleClose}><Link className={classes.link} to="/blog">Blog</Link></MenuItem>
-                {/*<MenuItem onClick={handleClose}>Log out</MenuItem>*/}
-              </Menu>
-            </div>
+            <Typography variant="h5" className={classes.title}>Traveho</Typography>
+            <Tabs value={value} onChange={handleChange} TabIndicatorProps={{style: {backgroundColor: "white"}}}>
+              <Tab label="Posts" className={classes.link} component={Link} to="/"/>
+              <Tab label="Blog" className={classes.link} component={Link} to="/blog" />
+            </Tabs>
           </Toolbar>
         </AppBar>
       </div>
     );
-  }
+}
 
