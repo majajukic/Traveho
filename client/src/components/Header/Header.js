@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import useStyles from './styles.js';
-import {AppBar, Toolbar, Typography, Tabs, Tab} from '@material-ui/core';
+import {AppBar, Toolbar, Typography, Tabs, Tab, Button} from '@material-ui/core';
 import {Link} from 'react-router-dom';
 //import DrawerMenu from '../DrawerMenu/DrawerMenu.js';
 
@@ -9,6 +9,8 @@ export default function Header() {
     const classes = useStyles();
 
     const [value, setValue] = useState(0);
+
+    const user = null;
 
     function handleChange(event, newValue) {
       setValue(newValue);
@@ -34,6 +36,14 @@ export default function Header() {
               <Tab label="Posts" className={classes.link} component={Link} to="/"/>
               <Tab label="Blog" className={classes.link} component={Link} to="/blog" />
             </Tabs>
+            {user ? (
+              <div >
+                {/*logika za avatar i logout dugme*/}
+              </div>
+
+            ) : (
+              <Button component={Link} to="/auth" variant="contained">Sign In</Button>
+            )}
           </Toolbar>
         </AppBar>
       </div>
