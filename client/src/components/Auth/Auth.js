@@ -1,14 +1,20 @@
 import React, {useState} from 'react'
-import {Avatar, Button, Paper, Grid, Typography, Container, TextField} from '@material-ui/core';
+import {useHistory} from 'react-router-dom';
+import {useDispatch} from 'react-redux';
+import {Avatar, Button, Paper, Grid, Typography, Container} from '@material-ui/core';
+import {GoogleLogin} from "react-google-login";
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Input from './Input.js';
+import Icon from './icon.js'
 import useStyles from './styles.js';
 
 const Auth = () => {
 
     const classes = useStyles();
     const [isSignup, setIsSignUp] = useState(false);
-    const[showPassword, setShowPassword] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
+    const dispatch = useDispatch();
+    const history = useHistory();
 
     const handleSubmit = () => {
 
@@ -26,6 +32,26 @@ const Auth = () => {
     const switchMode = () => {
         setIsSignUp(prevIsSignUp => !prevIsSignUp);
         handleShowPassword(false);
+    }
+
+    const googleSuccess = async (res) => {
+        //without optional chaining operator we would get an error if res object doesn't exist.This way its gonna be 'undefined'.
+        const result = res?.profileObj;
+        const token = res?.tokenId
+
+        try {
+            dispatch({type: 'AUTH', data: {result, token}});
+            history.push('/')//get the user back to the home route.
+
+        } catch(error) {
+            console.log(error);
+        }
+
+    }
+
+    const googleFailure = () => {
+        console.log("Google sign in failed! Try again later.");
+        
     }
 
     return (
@@ -52,6 +78,17 @@ const Auth = () => {
                     <Button className={classes.submit} type="submit" fullWidth variant="contained" color="primary">
                         { isSignup ? "Sign Up" : "Sign In"}
                     </Button>
+                    <GoogleLogin 
+                        clientId="1077599688905-8jc58l5288khrq5ri29iqvjos7es9phh.apps.googleusercontent.com"
+                        render={(renderProps) => (
+                            <Button className={classes.googleButton} variant="contained" fullWidth startIcon={<Icon />} onClick={renderProps.onClick} disabled={renderProps.disabled}>
+                                {isSignup ? "Google Sign Up" : "Google Sign In"}
+                            </Button>
+                        )}
+                        onSuccess={googleSuccess}
+                        onFailure={googleFailure}
+                        cookiePolicy="single_host_origin"
+                    />
                     <Grid container justify="center">
                         <Grid item>
                             <Button onClick={switchMode}>

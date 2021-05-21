@@ -12,6 +12,18 @@ export default makeStyles((theme) => ({
           flexGrow: 1
         },
         link: {
-          textDecoration:'none'
+          textDecoration:'none',
+          marginRight:'50px'
+        },
+        toolbar: {
+          display: 'flex',
+          justifyContent: 'flex-end',
+          width: '400px'
+        },
+        profile: {
+          display: 'flex',
+          justifyContent: 'space-between',
+          width: '170px',
+          marginRight:'10px'
         }
-      }));
+    }));

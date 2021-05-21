@@ -1,4 +1,5 @@
 import {FETCH_ALL, CREATE, DELETE, UPDATE, LIKE} from '../const/actionTypes.js';
+
 //in reducers, state always has to be equal to something.Empty array for the posts in this case:
 export default (posts = [], action) => {
     switch (action.type) {
