@@ -65,7 +65,7 @@ const Form = ({currentId, setCurrentId}) => {
       ...temp
     });
 
-    return Object.values(temp).every(x => x === "");//every() da li svi elementi niza zadovoljavaju validaciju.
+    return Object.values(temp).every(x => (x === "" || x === false));//every() da li svi elementi niza zadovoljavaju validaciju.
   }
 
   const clear = () => {
