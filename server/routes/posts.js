@@ -6,10 +6,10 @@ import {getPosts, createPost, updatePost, deletePost, likePost} from '../control
 //Setting up the router:
 const router = express.Router();
 
-router.get('/', getPosts);
-router.post('/', createPost);
-router.patch('/:id', updatePost);//a dynamic id to know what exactly to delete.
-router.delete('/:id', deletePost);
-router.patch('/:id/likePost', likePost);//patch request is a request for editing/changing sometnig.
+router.get("/", getPosts);
+router.post("/", createPost);
+router.patch("/:id", updatePost);//a dynamic id to know what exactly to delete.
+router.delete("/:id", deletePost);
+router.patch("/:id/likePost", likePost);//patch request is a request for editing/changing sometnig.
 
 export default router;

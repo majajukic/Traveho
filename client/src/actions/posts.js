@@ -1,5 +1,5 @@
 import {FETCH_ALL, CREATE, DELETE, UPDATE, LIKE} from '../const/actionTypes.js';
-import * as api from '../api';//import everything from actions as api.That means that I will be able to use fetchPosts like:
+import * as api from '../api/index.js';//import everything from actions as api.That means that I will be able to use fetchPosts like:
 
 //Action creators:functions that return actions
 //function that returns another async function (redux-thunk)
@@ -10,7 +10,7 @@ export const getPosts = () => async (dispatch) => {
     } catch (error) {
         console.log(error.message);
     }
-}
+};
 
 export const createPost =(post) => async (dispatch) => {
     try {
@@ -20,7 +20,7 @@ export const createPost =(post) => async (dispatch) => {
     } catch (error) {
         console.log(error.message);
     }
-}
+};
 
 export const deletePost = (id) => async (dispatch) => {
     try{
@@ -30,8 +30,7 @@ export const deletePost = (id) => async (dispatch) => {
     } catch(error) {
         console.log(error);
     }
-
-}
+};
 
 export const likePost = (id) => async (dispatch) => {
     try {
@@ -42,7 +41,7 @@ export const likePost = (id) => async (dispatch) => {
     } catch (error) {
         console.log(error);
     }
-}
+};
 
 export const updatePost = (id, post) => async (dispatch) => {
     try {
@@ -52,4 +51,4 @@ export const updatePost = (id, post) => async (dispatch) => {
     } catch (error) {
         console.log(error);
     }
-}
+};
