@@ -22,7 +22,7 @@ export const signin = async(req, res) => {
 
         //if the user exists in the database and the passwords match, we get the users tocken:
         const token = jwt.sign({ email: existingUser.email, id: existingUser._id }, "test", { expiresIn: "1h" });
-        res.status(200).json({ result: existingUser, token })
+        res.status(200).json({ result: existingUser, token });
 
     } catch (error) {
         res.status(500).json({ message: "Something went wrong"});

@@ -53,7 +53,7 @@ const Auth = () => {
 
     const switchMode = () => {
         setIsSignUp(prevIsSignUp => !prevIsSignUp);
-        handleShowPassword(false);
+        setShowPassword(false);
     }
 
     const googleSuccess = async (res) => {
@@ -93,7 +93,7 @@ const Auth = () => {
                                </>
                             )
                         }
-                        <Input name="email" label="Email Adress" handleChange={handleChange} type="email"/>
+                        <Input name="email" label="Email Adress" handleChange={handleChange} type="email" />
                         <Input name="password" label="Password" handleChange={handleChange} type={showPassword ? "text" : "password"} handleShowPassword={handleShowPassword}/>
                         { isSignup && <Input name="confirmPassword" label="Confirm Password" handleChange={handleChange} type="password" /> }
                     </Grid>

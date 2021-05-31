@@ -11,14 +11,14 @@ export default function Header() {
     const history = useHistory();
     const location = useLocation();
     const [value, setValue] = useState(0);
-    const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
+    const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
     
     console.log(user);
 
     const logout = () => {
-      dispatch({type: 'LOGOUT'});
+      dispatch({type: "LOGOUT"});
 
-      history.push('/');
+      history.push("/");
 
       setUser(null);
 
@@ -28,7 +28,7 @@ export default function Header() {
     useEffect(() => {
       const token = user?.token;
 
-      setUser(JSON.parse(localStorage.getItem('profile')))
+      setUser(JSON.parse(localStorage.getItem("profile")))
 
     }, [location]);/*The dependency array [] in useEffect lets you specify the conditions to trigger it.
                      If you provide useEffect an empty dependency array, it'll run exactly once. This time, it will run
