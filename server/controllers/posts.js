@@ -19,11 +19,12 @@ export const getPosts = async (req, res) => {
 export const createPost = async (req, res) => {
     const post = req.body;//this gathers data from the form and transfers it to the mongoose model to create a new post
 
-    const newPost = new PostMessage(post)
-    try {
-        await newPost.save();
+    const newPostMessage = new PostMessage({...post, creator: req.userId, createdAt: new Date().toISOString()});
 
-        res.status(201).json(newPost);//201, creation went okay.
+    try {
+        await newPostMessage.save();
+
+        res.status(201).json(newPostMessage);//201, creation went okay.
     } catch (error) {
         res.status(409).json({message: error.message});
     }

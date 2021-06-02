@@ -7,8 +7,9 @@ import jwt from 'jsonwebtoken';
 const auth = async (req, res, next) => {
     try {
     //checking to see if the user is who he claims to be using jsonwebtoken:
-        const token = req.headers.Authorization.split(" ")[1];//split credentials by blank and onlz take token from the array.
-        const isCustomAuth = toke.length < 500;//if the length of a token is less then 500, it is custom and not google oath.
+        //console.log(req.headers);
+        const token = req.headers.authorization.split(" ")[1];//split credentials by blank and onlz take token from the array.
+        const isCustomAuth = token.length < 500;//if the length of a token is less then 500, it is custom and not google oath.
 
         let decodedData; //data that we want to get from the token
         

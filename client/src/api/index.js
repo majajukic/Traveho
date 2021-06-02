@@ -7,7 +7,7 @@ const API = axios.create({ baseURL:"http://localhost:5000" });
 API.interceptors.request.use((req) => {
     //sending token back to the backend to verify if we are logged in:
     if(localStorage.getItem("profile")) {
-        req.headers.Authorization  = `Bearer ${JSON.parse(localStorage.getItem("profile")).token}`;
+        req.headers.authorization  = `Bearer ${JSON.parse(localStorage.getItem("profile")).token}`;
     }
     //a must for interceptors! - to make it possible to make all the requests below!
     return req;

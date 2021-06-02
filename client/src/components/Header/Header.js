@@ -3,6 +3,7 @@ import {useDispatch} from 'react-redux';
 import useStyles from './styles.js';
 import {AppBar, Toolbar, Typography, Tabs, Tab, Button, Avatar} from '@material-ui/core';
 import {Link, useHistory, useLocation} from 'react-router-dom';
+import decode from 'jwt-decode';
 
 export default function Header() {
 
@@ -27,6 +28,15 @@ export default function Header() {
     //By using this Hook, you tell React that your component needs to do something after render
     useEffect(() => {
       const token = user?.token;
+
+      if(token) {
+        const decodedToken = decode(token);
+
+        //time in miliseconds
+        if(decodedToken.exp * 1000 < new Date().getTime()) {
+          logout();
+        }
+      }
 
       setUser(JSON.parse(localStorage.getItem("profile")))
 
