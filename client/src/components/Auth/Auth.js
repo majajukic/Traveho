@@ -45,23 +45,21 @@ const Auth = () => {
 
     const validate = () => {
         const temp = {};
-        temp.password = formData.password.length > 6 ? "" : "Need more than 6 characters";
-        if (!validateEmail(formData.email)) {
-            temp.email = 'Email is not in correct format';
-        }
-        else {
-            temp.email = '';
-        }
+        temp.password = formData.password.length > 5 ? "" : "Password needs more than 5 characters";
+        temp.passwordFailed = formData.password.length > 5 ? false : true;
 
         if (isSignup) {
           temp.confirmPassword =
-            formData.confirmPassword === formData.password
-              ? ""
-              : `Passwords don't match!`;
-          
-          temp.firstName = formData.firstName === '' ? 'First name is required' : '';
-          temp.lastName = formData.lastName === '' ? 'Last name is required' : '';
+                formData.confirmPassword === formData.password
+                ? ""
+                : "Passwords don't match.Try again!";
+            
+            temp.confirmPasswordFailed =
+                formData.confirmPassword === formData.password
+                ? false
+                : true;
         }
+        
         setErrors({
           ...temp
         });
@@ -78,12 +76,6 @@ const Auth = () => {
     //when the state is being changed using the olde state, prevState is needed.
     const handleShowPassword = () => {
         setShowPassword(prevShowPassword => !prevShowPassword);
-    }
-
-    // helper for checking if it is valid email format
-    const validateEmail = (email) => {
-        const re = /^(([^<>()[\]\\.,;:\s@\\"]+(\.[^<>()[\]\\.,;:\s@\\"]+)*)|(\\".+\\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return re.test(email);
     }
 
     const switchMode = () => {
@@ -123,14 +115,14 @@ const Auth = () => {
                         {
                             isSignup && (
                                 <>
-                                    <Input name="firstName" error={errors.firstName} label="First Name" handleChange={handleChange} autoFocus half />
-                                    <Input name="lastName" error={errors.lastName} label="Last Name" handleChange={handleChange} half />
+                                    <Input name="firstName" label="First Name" handleChange={handleChange} autoFocus half />
+                                    <Input name="lastName"  label="Last Name" handleChange={handleChange} half />
                                </>
                             )
                         }
-                        <Input name="email" label="Email Adress" error={errors.email} handleChange={handleChange} type="email" />
-                        <Input name="password" label="Password" handleChange={handleChange} error={errors.password} type={showPassword ? "text" : "password"} handleShowPassword={handleShowPassword}/>
-                        { isSignup && <Input name="confirmPassword" label="Confirm Password" error={errors.confirmPassword} handleChange={handleChange} type="password" /> }
+                        <Input name="email" label="Email Adress" handleChange={handleChange} type="email" />
+                        <Input name="password" label="Password" handleChange={handleChange} error={errors.passwordFailed} helperText={errors.password} type={showPassword ? "text" : "password"} handleShowPassword={handleShowPassword}/>
+                        { isSignup && <Input name="confirmPassword" label="Confirm Password" error={errors.confirmPasswordFailed} helperText={errors.confirmPassword} handleChange={handleChange} type="password" /> }
                     </Grid>
                     <Button className={classes.submit} type="submit" fullWidth variant="contained" color="primary">
                         { isSignup ? "Sign Up" : "Sign In"}
