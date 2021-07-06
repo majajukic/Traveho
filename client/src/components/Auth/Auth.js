@@ -45,22 +45,22 @@ const Auth = () => {
 
     const validate = () => {
         const temp = {};
-        temp.password = formData.password.length > 6 ? "" : "Need more characterss";
-        temp.passwordFailed = formData.password.length > 6 ? false : true;
-        temp.emailFailed = validateEmail(formData.email);
-        temp.email = temp.emailFailed ? 'Email is not in correct format' : '';
+        temp.password = formData.password.length > 6 ? "" : "Need more than 6 characters";
+        if (!validateEmail(formData.email)) {
+            temp.email = 'Email is not in correct format';
+        }
+        else {
+            temp.email = '';
+        }
 
         if (isSignup) {
           temp.confirmPassword =
             formData.confirmPassword === formData.password
               ? ""
               : `Passwords don't match!`;
-          temp.confirmPasswordFailed = formData.confirmPassword === formData.password ? false : true;
           
           temp.firstName = formData.firstName === '' ? 'First name is required' : '';
-          temp.firstNameFailed = formData.firstName !== '' ? false : true;
           temp.lastName = formData.lastName === '' ? 'Last name is required' : '';
-          temp.lastNameFailed = formData.lastName !== '' ? false : true;
         }
         setErrors({
           ...temp
@@ -80,9 +80,10 @@ const Auth = () => {
         setShowPassword(prevShowPassword => !prevShowPassword);
     }
 
+    // helper for checking if it is valid email format
     const validateEmail = (email) => {
-        const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return re.test(String(email).toLowerCase());
+        const re = /^(([^<>()[\]\\.,;:\s@\\"]+(\.[^<>()[\]\\.,;:\s@\\"]+)*)|(\\".+\\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(email);
     }
 
     const switchMode = () => {
