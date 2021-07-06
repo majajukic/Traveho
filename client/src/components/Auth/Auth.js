@@ -24,6 +24,7 @@ const Auth = () => {
     const [isSignup, setIsSignUp] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
     const [formData, setFormData] = useState(initialState);
+    const [errors, setErrors] = useState({});
     const dispatch = useDispatch();
     const history = useHistory();
 
@@ -32,13 +33,41 @@ const Auth = () => {
         e.preventDefault();
 
         //two types of submits:sign in or sign up:
-        if(isSignup) {
+        if (validate()) {
+          if (isSignup) {
             dispatch(signup(formData, history));
-        } else {
+          } else {
             dispatch(signin(formData, history));
+          }
         }
 
     }
+
+    const validate = () => {
+        const temp = {};
+        temp.password = formData.password.length > 6 ? "" : "Need more characterss";
+        temp.passwordFailed = formData.password.length > 6 ? false : true;
+        temp.emailFailed = validateEmail(formData.email);
+        temp.email = temp.emailFailed ? 'Email is not in correct format' : '';
+
+        if (isSignup) {
+          temp.confirmPassword =
+            formData.confirmPassword === formData.password
+              ? ""
+              : `Passwords don't match!`;
+          temp.confirmPasswordFailed = formData.confirmPassword === formData.password ? false : true;
+          
+          temp.firstName = formData.firstName === '' ? 'First name is required' : '';
+          temp.firstNameFailed = formData.firstName !== '' ? false : true;
+          temp.lastName = formData.lastName === '' ? 'Last name is required' : '';
+          temp.lastNameFailed = formData.lastName !== '' ? false : true;
+        }
+        setErrors({
+          ...temp
+        });
+    
+        return Object.values(temp).every(x => (x === "" || x === false));
+      }
 
     const handleChange = (e) => {
         //spread all properties, but only change one specific field that is being changed in current time.
@@ -49,6 +78,11 @@ const Auth = () => {
     //when the state is being changed using the olde state, prevState is needed.
     const handleShowPassword = () => {
         setShowPassword(prevShowPassword => !prevShowPassword);
+    }
+
+    const validateEmail = (email) => {
+        const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(String(email).toLowerCase());
     }
 
     const switchMode = () => {
@@ -88,14 +122,14 @@ const Auth = () => {
                         {
                             isSignup && (
                                 <>
-                                    <Input name="firstName" label="First Name" handleChange={handleChange} autoFocus half />
-                                    <Input name="lastName" label="Last Name" handleChange={handleChange} half />
+                                    <Input name="firstName" error={errors.firstName} label="First Name" handleChange={handleChange} autoFocus half />
+                                    <Input name="lastName" error={errors.lastName} label="Last Name" handleChange={handleChange} half />
                                </>
                             )
                         }
-                        <Input name="email" label="Email Adress" handleChange={handleChange} type="email" />
-                        <Input name="password" label="Password" handleChange={handleChange} type={showPassword ? "text" : "password"} handleShowPassword={handleShowPassword}/>
-                        { isSignup && <Input name="confirmPassword" label="Confirm Password" handleChange={handleChange} type="password" /> }
+                        <Input name="email" label="Email Adress" error={errors.email} handleChange={handleChange} type="email" />
+                        <Input name="password" label="Password" handleChange={handleChange} error={errors.password} type={showPassword ? "text" : "password"} handleShowPassword={handleShowPassword}/>
+                        { isSignup && <Input name="confirmPassword" label="Confirm Password" error={errors.confirmPassword} handleChange={handleChange} type="password" /> }
                     </Grid>
                     <Button className={classes.submit} type="submit" fullWidth variant="contained" color="primary">
                         { isSignup ? "Sign Up" : "Sign In"}
