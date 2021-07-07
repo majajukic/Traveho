@@ -38,7 +38,6 @@ const Auth = () => {
             dispatch(signup(formData, history));
           } else {
             // return in action makes a promise and with .then the status code can be accessed: 
-            // taj objekat koji si returnovala
             dispatch(signin(formData, history)).then((err) => {
               if (err.response.status === 404 || err.response.status === 400) {
                 alert("No user with such creditentials found. Please, check your email and password.");
