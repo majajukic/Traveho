@@ -13,7 +13,7 @@ export const signin = (formData, history) => async(dispatch) => {
         history.push("/");
 
     } catch (error) {
-        // ovde moram spread da uradim da bi mi poslao originalan obj sa svim property-ima
+        // the error needs to be spread in order to keep all the relevant values
         return {...error};
     }
 };

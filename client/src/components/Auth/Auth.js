@@ -37,11 +37,11 @@ const Auth = () => {
           if (isSignup) {
             dispatch(signup(formData, history));
           } else {
-            // kad tamo u akciji uradis return onda ovde dobijas promise nad kojim mozes da pozoves .then() callback i da uzmes 
+            // return in action makes a promise and with .then the status code can be accessed: 
             // taj objekat koji si returnovala
             dispatch(signin(formData, history)).then((err) => {
-              if (err.response.status === 404) {
-                alert("Ne postoji user sa ovim emailom i passwordom.");
+              if (err.response.status === 404 || err.response.status === 400) {
+                alert("No user with such creditentials found. Please, check your email and password.");
               }
             });
           }
