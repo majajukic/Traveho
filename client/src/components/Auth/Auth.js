@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState } from 'react'
 import {useHistory} from 'react-router-dom';
 import {useDispatch} from 'react-redux';
 import {Avatar, Button, Paper, Grid, Typography, Container} from '@material-ui/core';
@@ -37,7 +37,13 @@ const Auth = () => {
           if (isSignup) {
             dispatch(signup(formData, history));
           } else {
-            dispatch(signin(formData, history));
+            // kad tamo u akciji uradis return onda ovde dobijas promise nad kojim mozes da pozoves .then() callback i da uzmes 
+            // taj objekat koji si returnovala
+            dispatch(signin(formData, history)).then((err) => {
+              if (err.response.status === 404) {
+                alert("Ne postoji user sa ovim emailom i passwordom.");
+              }
+            });
           }
         }
 
