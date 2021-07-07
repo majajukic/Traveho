@@ -1,10 +1,12 @@
-import {FETCH_ALL, CREATE, DELETE, UPDATE, LIKE} from '../const/actionTypes.js';
+import {FETCH_ALL, FETCH_BY_SEARCH, CREATE, DELETE, UPDATE, LIKE} from '../const/actionTypes.js';
 
 //in reducers, state always has to be equal to something.Empty array for the posts in this case:
 export default (posts = [], action) => {
     switch (action.type) {
         case FETCH_ALL:
             return action.payload;//our actual posts.
+        case FETCH_BY_SEARCH:
+            return action.payload;
         case CREATE:
             return [...posts, action.payload];//first we spread the posts,so we dont override previous data.
         case UPDATE:

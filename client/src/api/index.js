@@ -15,6 +15,7 @@ API.interceptors.request.use((req) => {
 
 //API endpoints for posts:
 export const fetchPosts = () => API.get("/posts");//gets all the posts that we currently have in our database.
+export const fetchPostsBySearch = (searchQuery) => API.get(`/posts/search?searchQuery=${searchQuery.searchTerm || "none"}&tags=${searchQuery.tags}`);//?searchQuery is a query parameter
 export const createPost = (newPost) => API.post("/posts", newPost);//creates a post.
 export const updatePost = (id, updatedPost) => API.patch(`/posts/${id}`, updatedPost);//updates a post.
 export const deletePost = (id) => API.delete(`posts/${id}`);//removes a post

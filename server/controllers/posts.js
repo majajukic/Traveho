@@ -16,6 +16,20 @@ export const getPosts = async (req, res) => {
     }
 }
 
+export const getPostsBySearch = async (req, res) => {
+    const { searchQuery, tags } = req.query;
+
+    try {
+        const title = new RegExp(searchQuery, "i");//i stands for ignore casing / Regular expression for easier DB search
+
+        const posts = await PostMessage.find({ $or: [ { title }, { tags: { $in: tags.split(',') } } ]});//match by title and tags
+
+        res.json({ data: posts });
+    } catch (error) {    
+        res.status(404).json({ message: error.message });
+    }
+}
+
 export const createPost = async (req, res) => {
     const post = req.body;//this gathers data from the form and transfers it to the mongoose model to create a new post
 

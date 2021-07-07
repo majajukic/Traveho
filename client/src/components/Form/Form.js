@@ -56,7 +56,7 @@ const Form = ({currentId, setCurrentId}) => {
   if(!user?.result?.name) {
     return (
       <Paper className={classes.paper}>
-        <Typography variant="h6" align="center">You must be signed in to create posts and like other posts!</Typography>
+        <Typography variant="h6" align="center">You must be signed in to be able to create posts and like other user's posts!</Typography>
       </Paper>
     )
   }

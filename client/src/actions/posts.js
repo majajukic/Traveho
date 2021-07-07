@@ -1,4 +1,4 @@
-import {FETCH_ALL, CREATE, DELETE, UPDATE, LIKE} from '../const/actionTypes.js';
+import {FETCH_ALL, FETCH_BY_SEARCH, CREATE, DELETE, UPDATE, LIKE} from '../const/actionTypes.js';
 import * as api from '../api/index.js';//import everything from actions as api.That means that I will be able to use fetchPosts like:
 
 //Action creators:functions that return actions
@@ -11,6 +11,16 @@ export const getPosts = () => async (dispatch) => {
         console.log(error.message);
     }
 };
+
+export const getPostsBySearch = (searchQuery) => async (dispatch) => {
+    try {
+        const {data: {data}} = await api.fetchPostsBySearch(searchQuery);
+
+        dispatch({type: FETCH_BY_SEARCH, payload:data});
+    } catch (error) {
+        console.log(error.message);
+    }
+}
 
 export const createPost =(post) => async (dispatch) => {
     try {
