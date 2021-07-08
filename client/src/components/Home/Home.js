@@ -1,8 +1,8 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {useDispatch} from 'react-redux';//to dispatch an action - this is a hook.
 import { useHistory, useLocation } from 'react-router-dom';
 import {Container, Grow, Grid, Paper, AppBar, TextField, Button,} from '@material-ui/core';
-import {getPosts, getPostsBySearch} from '../../actions/posts.js';
+import {getPostsBySearch} from '../../actions/posts.js';
 import ChipInput from 'material-ui-chip-input';//formats the inputs into chips
 import Posts from '../Posts/Posts.js';
 import Form from '../Form/Form.js';
@@ -34,9 +34,9 @@ const Home = () => {
 
 
     //useEffect to dispatch an action:
-    useEffect(() => {
+    /*useEffect(() => {
         dispatch(getPosts());
-    }, [dispatch]);
+    }, [currentId, dispatch]);*/
 
     const handleKeyPress = (e) => {
         if(e.keyCode === 13) {
@@ -94,8 +94,8 @@ const Home = () => {
                             <Button onClick={searchPost} className={classes.searchButton} variant="contained">Search</Button>
                         </AppBar>
                         <Form currentId={currentId} setCurrentId={setCurrentId}/>
-                        <Paper elevation={6}>
-                            <Paginate />
+                        <Paper elevation={6} className={classes.pagination}>
+                            <Paginate page={page} />
                         </Paper>
                     </Grid>
                 </Grid>

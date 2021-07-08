@@ -1,8 +1,8 @@
-import React, {useState} from 'react';
+import React from 'react';
 import useStyles from './styles.js';
 import{Card, CardActions, CardContent, CardMedia, Button, Typography} from '@material-ui/core';
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
-import ThumbUpAltOutlinedIcon from '@material-ui/icons/ThumbUpAltOutlined';
+import ThumbUpAltOutlined from '@material-ui/icons/ThumbUpAltOutlined';
 import DeleteIcon from '@material-ui/icons/Delete';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import moment from 'moment';
@@ -13,36 +13,21 @@ import {deletePost, likePost} from '../../../actions/posts.js';
 const Post = ({post, setCurrentId}) => {
     const classes = useStyles();
     const dispatch = useDispatch();
-    const [like, setLike] = useState(false);
     const user = JSON.parse(localStorage.getItem("profile"));
 
     //likes subcomponent to monitor likes easier:
     const Likes = () => {
-        if (post.likes.length > 0) {
-          return post.likes.find((like) => like === (user?.result?.googleId || user?.result?._id))
-            ? (
-              <><ThumbUpAltIcon fontSize="large" />&nbsp;{post.likes.length > 2 ? `You and ${post.likes.length - 1} others` : `${post.likes.length} like${post.likes.length > 1 ? 's' : ''}` }</>
-            ) : (
-              <><ThumbUpAltIcon fontSize="large" />&nbsp;{post.likes.length} {post.likes.length === 1 ? 'Like' : 'Likes'}</>
-            );
-        }
-    
-        return <><ThumbUpAltIcon fontSize="large" />&nbsp;</>;
-      };
-
-      //dislikes subcomponent:
-      const Dislikes = () => {
-        if (post.likes.length > 0) {
-          return post.likes.find((like) => like === (user?.result?.googleId || user?.result?._id))
-            ? (
-              <><ThumbUpAltOutlinedIcon fontSize="large" />&nbsp;{post.likes.length > 2 ? `You and ${post.likes.length - 1} others` : `${post.likes.length} like${post.likes.length > 1 ? 's' : ''}` }</>
-            ) : (
-              <><ThumbUpAltOutlinedIcon fontSize="large" />&nbsp;{post.likes.length} {post.likes.length === 1 ? 'Like' : 'Likes'}</>
-            );
-        }
-    
-        return <><ThumbUpAltOutlinedIcon fontSize="large" />&nbsp;</>;
-      };
+      if (post?.likes?.length > 0) {
+        return post.likes.find((like) => like === (user?.result?.googleId || user?.result?._id))
+          ? (
+            <><ThumbUpAltIcon fontSize="large" />&nbsp;{post.likes.length > 2 ? `You and ${post.likes.length - 1} others` : `${post.likes.length} like${post.likes.length > 1 ? 's' : ''}` }</>
+          ) : (
+            <><ThumbUpAltOutlined fontSize="large" />&nbsp;{post.likes.length} {post.likes.length === 1 ? 'Like' : 'Likes'}</>
+          );
+      }
+  
+      return <><ThumbUpAltOutlined fontSize="large" />&nbsp;</>;
+    };
 
     const handleClickDelete = () => {
         if(window.confirm('Are you sure you want to delete this item?'))
@@ -52,8 +37,6 @@ const Post = ({post, setCurrentId}) => {
 
     const handleClickLike = () => {
         dispatch(likePost(post._id));
-        setLike(prevLike => !prevLike);
-        console.log(like);
     }
 
     return(
@@ -66,7 +49,7 @@ const Post = ({post, setCurrentId}) => {
             <div className={classes.overlay2}>
                 {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) && (
                 <Button style={{color:'white'}} size="small" onClick={() => setCurrentId(post._id)}>
-                    <MoreHorizIcon fontSize="default" />
+                    <MoreHorizIcon fontSize="medium" />
                 </Button>
                 )}
             </div>
@@ -79,7 +62,7 @@ const Post = ({post, setCurrentId}) => {
             </CardContent>
             <CardActions className={classes.cardActions}>
                 <Button size="small" color="primary" disabled={!user?.result} onClick={handleClickLike}>
-                    { like ? <Dislikes /> : <Likes /> }
+                    <Likes />
                 </Button>
                 {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) && (
                     <Button size="small" color="primary" onClick={handleClickDelete}>

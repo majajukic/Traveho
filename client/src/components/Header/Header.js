@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {useDispatch} from 'react-redux';
 import useStyles from './styles.js';
-import {AppBar, Toolbar, Typography, Tabs, Tab, Button, Avatar} from '@material-ui/core';
+import {AppBar, Toolbar, Typography, Button, Avatar} from '@material-ui/core';
 import {Link, useHistory, useLocation} from 'react-router-dom';
 import decode from 'jwt-decode';
 
@@ -11,10 +11,9 @@ export default function Header() {
     const dispatch = useDispatch();
     const history = useHistory();
     const location = useLocation();
-    const [value, setValue] = useState(0);
     const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
     
-    console.log(user);
+    //console.log(user);
 
     const logout = () => {
       dispatch({type: "LOGOUT"});
@@ -44,19 +43,19 @@ export default function Header() {
                      If you provide useEffect an empty dependency array, it'll run exactly once. This time, it will run
                      only when the location changes!*/
 
-    function handleChange(event, newValue) {
-      setValue(newValue);
-    }
+    function changeColor(e) {
+      e.target.style.color = "#7c5ee0";
+    }    
+    
+    function resetColor(e) {
+      e.target.style.color = "white";
+    } 
   
     return (
       <div className={classes.root}>
         <AppBar position="fixed">
           <Toolbar>
-            <Typography variant="h5" className={classes.title}>Traveho</Typography>
-            <Tabs value={value} onChange={handleChange} TabIndicatorProps={{style: {backgroundColor: "white"}}}>
-              <Tab label="Posts" className={classes.link} component={Link} to="/"/>
-              <Tab label="Blog" className={classes.link} component={Link} to="/blog" />
-            </Tabs>
+            <Typography variant="h5" className={classes.title} component={Link} to="/" onMouseOver={changeColor} onMouseLeave={resetColor}>Traveho</Typography>
             {user ? (
               <div className={classes.profile}>
                 <Avatar style={{backgroundColor:'#7c5ee0'}}>{user.result.name.charAt(0)}</Avatar>

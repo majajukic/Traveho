@@ -15,8 +15,8 @@ const Form = ({currentId, setCurrentId}) => {
  // const history = useHistory();
 
   //fetch a new post. Finding the post with the same id as the one we want to edit and returning it:
-  const post = useSelector((state) => currentId ? state.posts.find((p) => p._id === currentId) : null);
-
+  const post = useSelector((state) => (currentId ? state.posts.posts.find((message) => message._id === currentId) : null));
+  
   const [postData, setPostData] = useState({
     title: "",
     message: "",
@@ -54,7 +54,7 @@ const Form = ({currentId, setCurrentId}) => {
     }
   }
 
-  //if no user is logged in, insetad of a form show message:
+  //if no user is logged in, instead of a form show message:
   if(!user?.result?.name) {
     return (
       <Paper className={classes.paper}>
@@ -89,7 +89,7 @@ const Form = ({currentId, setCurrentId}) => {
   };
 
   return (
-    <Paper className={classes.paper}>
+    <Paper className={classes.paper} elevation={6}>
       <form autoComplete="off" className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
         <Typography variant="h6">{currentId ? "Edit" : "Share"} your trip</Typography>
         <TextField name="title" variant="outlined" label="Title" fullWidth error={errors.titleFailed} helperText={errors.title} value={postData.title || ""} onChange={(e) => setPostData({ ...postData, title: e.target.value })}/>

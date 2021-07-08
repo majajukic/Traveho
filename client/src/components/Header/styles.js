@@ -9,7 +9,10 @@ export default makeStyles((theme) => ({
           marginRight: theme.spacing(2)//'theme' is used to create consistency throughout the app - in this case consistent spacing between elements.
         },
         title: {
-          flexGrow: 1
+          flexGrow: 1,
+          textDecoration:'none',
+          marginRight:'50px',
+          color:'white'
         },
         link: {
           textDecoration:'none',

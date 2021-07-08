@@ -39,7 +39,7 @@ const Auth = () => {
           } else {
             // return in action makes a promise and with .then the status code can be accessed: 
             dispatch(signin(formData, history)).then((err) => {
-              if (err.response.status === 404 || err.response.status === 400) {
+              if (err?.response.status === 404 || err?.response.status === 400) {
                 alert("No user with such creditentials found. Please, check your email and password.");
               }
             });
@@ -143,7 +143,7 @@ const Auth = () => {
                         onFailure={googleFailure}
                         cookiePolicy="single_host_origin"
                     />
-                    <Grid container justify="center">
+                    <Grid container justifyContent="center">
                         <Grid item>
                             <Button onClick={switchMode}>
                                 <Typography className={classes.switch} variant="body2">{ isSignup ? "Already have an account? Sign In" : "Don't have an account? Sign Up"}</Typography>
