@@ -3,9 +3,11 @@ import * as api from '../api/index.js';//import everything from actions as api.T
 
 //Action creators:functions that return actions
 //function that returns another async function (redux-thunk)
-export const getPosts = () => async (dispatch) => {
+export const getPosts = (page) => async (dispatch) => {
     try {
-        const {data} = await api.fetchPosts();// {data} that we are returning from the backend.
+        const {data} = await api.fetchPosts(page);// {data} that we are returning from the backend.
+        console.log(data);
+
         dispatch({type: FETCH_ALL, payload:data});//redux-thunk way of return.
     } catch (error) {
         console.log(error.message);
