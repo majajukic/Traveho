@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {useDispatch} from 'react-redux';
 import useStyles from './styles.js';
 import {AppBar, Toolbar, Typography, Button, Avatar} from '@material-ui/core';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import {Link, useHistory, useLocation} from 'react-router-dom';
 import decode from 'jwt-decode';
 
@@ -59,7 +60,7 @@ export default function Header() {
             <Typography variant="h5" className={classes.title} component={Link} to="/" onMouseOver={changeColor} onMouseLeave={resetColor}>Traveho</Typography>
             {user ? (
               <div className={classes.profile}>
-                <Avatar style={{backgroundColor:'#7c5ee0'}}>{user.result.name.charAt(0)}</Avatar>
+                {user?.result?.role === 'admin' ? <AccountCircleIcon fontSize="large" /> : <Avatar style={{backgroundColor:'#7c5ee0'}}>{user.result.name.charAt(0)}</Avatar>}
                 <Button className={classes.logout} variant="contained" onClick={logout} style={{backgroundColor:'#7c5ee0', color:'white'}}>Log Out</Button>
               </div>
 
