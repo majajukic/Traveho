@@ -1,6 +1,7 @@
 import {FETCH_ALL, FETCH_BY_SEARCH, CREATE, DELETE, UPDATE, LIKE, START_LOADING, END_LOADING} from '../const/actionTypes.js';
 
 //in reducers, state always has to be equal to something.Empty array for the posts in this case:
+// eslint-disable-next-line import/no-anonymous-default-export
 export default (state = { isLoading: true, posts: [] }, action) => {
     switch (action.type) {
         case START_LOADING:

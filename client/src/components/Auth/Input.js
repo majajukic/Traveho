@@ -19,11 +19,12 @@ const Input = ({name, handleChange, label, half, autoFocus, type, handleShowPass
                helperText={helperText}
                InputProps={name === "password" ? {
                    endAdornment: (
-                       <InputAdornment position="end">
-                           <IconButton onClick={handleShowPassword}/>
-                           { type === "password" ? <Visibility /> : <VisibilityOff />}
-                       </InputAdornment>
-                   )
+                        <IconButton onClick={handleShowPassword}>
+                            <InputAdornment position="end">
+                            {type === "password" ? <Visibility /> : <VisibilityOff />}
+                            </InputAdornment>
+                        </IconButton>
+                    )
                 } : null}
            />
        </Grid>

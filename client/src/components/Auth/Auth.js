@@ -19,7 +19,7 @@ const initialState = {
 }
 
 const Auth = () => {
-
+    
     const classes = useStyles();
     const [isSignup, setIsSignUp] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
@@ -27,6 +27,12 @@ const Auth = () => {
     const [errors, setErrors] = useState({});
     const dispatch = useDispatch();
     const history = useHistory();
+    const user = JSON.parse(localStorage.getItem('profile'));   //getting a hold of the user to check if he is logged in or not
+                                                                //and to render the Auth page accordingly.
+
+    if (user) {
+        history.push('/');
+    }
 
     const handleSubmit = (e) => {
         //always add this to form submit in React to avoid reloads of the page.

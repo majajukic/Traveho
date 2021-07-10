@@ -48,7 +48,7 @@ const Post = ({post, setCurrentId}) => {
             </div>
             <div className={classes.overlay2}>
                 {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) && (
-                <Button style={{color:'white'}} size="small" onClick={() => setCurrentId(post._id)}>
+                <Button className={classes.dots} size="small" onClick={() => setCurrentId(post._id)}>
                     <MoreHorizIcon fontSize="medium" />
                 </Button>
                 )}
@@ -64,7 +64,7 @@ const Post = ({post, setCurrentId}) => {
                 <Button size="small" color="primary" disabled={!user?.result} onClick={handleClickLike}>
                     <Likes />
                 </Button>
-                {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) && (
+                {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator || user?.result?.role === 'admin') && (
                     <Button size="small" color="primary" onClick={handleClickDelete}>
                     <DeleteIcon fontSize="large" />
                 </Button>

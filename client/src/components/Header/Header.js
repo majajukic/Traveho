@@ -19,6 +19,7 @@ export default function Header() {
       dispatch({type: "LOGOUT"});
 
       history.push("/");
+      localStorage.removeItem("profile");
 
       setUser(null);
 
