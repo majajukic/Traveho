@@ -38,12 +38,6 @@ const Home = () => {
         dispatch(getPosts());
     }, [currentId, dispatch]);*/
 
-    const handleKeyPress = (e) => {
-        if(e.keyCode === 13) {
-            searchPost();
-        }
-    }
-
     const handleAdd = (tag) => {
         setTags([...tags, tag]);
     }
@@ -78,7 +72,6 @@ const Home = () => {
                                 label="Search by word in the title"
                                 fullWidth
                                 value={searchTerm}
-                                onKeyPress={handleKeyPress}
                                 onChange={(e)=>{
                                     setSearchTerm(e.target.value)
                                 }}
