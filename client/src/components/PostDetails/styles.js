@@ -4,16 +4,15 @@ export default makeStyles((theme) => ({
   media: {
     borderRadius: '20px',
     objectFit: 'cover',
-    width: '100%',
-    maxHeight: '600px',
-
+    width:'100%',
+    height:'350px'
   },
   card: {
     display: 'flex',
     width: '100%',
     [theme.breakpoints.down('sm')]: {
       flexWrap: 'wrap',
-      flexDirection: 'column',
+      flexDirection: 'column'
     },
   },
   section: {
@@ -53,5 +52,10 @@ export default makeStyles((theme) => ({
     marginTop:"100px",
     marginLeft:"40px",
     marginRight:"40px"
-}
+},
+  suggested: {
+    width:"200px",
+    height:"150px",
+    borderRadius:"20px"
+  }
 }));

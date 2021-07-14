@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { Paper, Typography, CircularProgress, Divider } from '@material-ui/core/';
+import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
 import { useParams, useHistory } from 'react-router-dom';
@@ -14,19 +15,22 @@ const PostDetails = () => {
   const classes = useStyles();
   const { id } = useParams();
 
+  //there can be multiple useEffects in one functional component
   useEffect(() => {
     dispatch(getPost(id));
   }, [id]);
 
-  /*useEffect(() => {
+  useEffect(() => {
     if (post) {
-      dispatch(getPostsBySearch({ search: 'none', tags: post?.tags.join(',') }));
+      dispatch(getPostsBySearch({ search: 'none', tags: post?.tags.join(',') }));//recommended by tags
     }
-  }, [post]);*/
+  }, [post]);
 
   if (!post) return null;
 
   const openPost = (_id) => history.push(`/posts/${_id}`);
+
+  const recommendedPosts = posts.filter(({_id}) => _id !== post._id);//current post cant be its own recommended
 
   if (isLoading) {
     return (
@@ -35,8 +39,6 @@ const PostDetails = () => {
       </Paper>
     );
   }
-
-  //const recommendedPosts = posts.filter(({ _id }) => _id !== post._id);
 
   return (
     <Paper className={classes.paper} elevation={6}>
@@ -52,9 +54,25 @@ const PostDetails = () => {
           <Divider className={classes.devider} />
         </div>
         <div className={classes.imageSection}>
-          <img className={classes.media} src={post.selectedFile} alt={post.title} />
+          <img className={classes.media} src={post.selectedFile} alt={post.title}/>
         </div>
       </div>
+      {recommendedPosts && (
+        <div className={classes.section}>
+        <Typography gutterBottom variant={"h5"}>{ recommendedPosts.length ? "You might also like:" : "No suggestions found." }</Typography>
+        <Divider />
+        <div className={classes.recommendedPosts}>
+        {recommendedPosts.map(({ title, name, message, likes, selectedFile, _id }) => (
+              <div style={{ margin: '20px', cursor: 'pointer' }} onClick={() => openPost(_id)} key={_id}>
+                <Typography gutterBottom variant="h6">{title}</Typography>
+                <Typography gutterBottom variant="subtitle2">{name}</Typography>
+                <Typography gutterBottom variant="subtitle1"><ThumbUpAltIcon fontSize="medium" /> {likes.length} </Typography>
+                <img src={selectedFile} className={classes.suggested} alt="travel" />
+              </div>
+            ))}
+        </div>
+      </div>
+      )}
     </Paper>
   );
 };
