@@ -4,6 +4,18 @@ import PostMessage from '../models/postMessage.js';
 import mongoose from 'mongoose';
 
 //find() is an asynchronous function, it takes time, so we add 'await'.
+export const getPost = async (req, res) => { 
+    const { id } = req.params;
+
+    try {
+        const post = await PostMessage.findById(id);
+        
+        res.status(200).json(post);
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+}
+
 export const getPosts = async (req, res) => {
     const { page } = req.query;
     
@@ -22,12 +34,10 @@ export const getPosts = async (req, res) => {
 
 export const getPostsBySearch = async (req, res) => {
     const { searchQuery, tags } = req.query;
-
     try {
         const title = new RegExp(searchQuery, "i");//i stands for ignore casing / Regular expression for easier DB search
 
         const posts = await PostMessage.find({ $or: [ { title }, { tags: { $in: tags.split(',') } } ]});//match by title and tags
-
         res.json({ data: posts });
     } catch (error) {    
         res.status(404).json({ message: error.message });

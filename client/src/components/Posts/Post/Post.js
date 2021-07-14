@@ -1,18 +1,19 @@
 import React from 'react';
 import useStyles from './styles.js';
-import{Card, CardActions, CardContent, CardMedia, Button, Typography} from '@material-ui/core';
+import{Card, CardActions, CardContent, CardMedia, Button, Typography, ButtonBase} from '@material-ui/core';
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import ThumbUpAltOutlined from '@material-ui/icons/ThumbUpAltOutlined';
 import DeleteIcon from '@material-ui/icons/Delete';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import moment from 'moment';
-//import Posts from '../Posts.js';
+import {useHistory} from 'react-router-dom';
 import {useDispatch} from 'react-redux';
 import {deletePost, likePost} from '../../../actions/posts.js';
 
 const Post = ({post, setCurrentId}) => {
     const classes = useStyles();
     const dispatch = useDispatch();
+    const history = useHistory();
     const user = JSON.parse(localStorage.getItem("profile"));
 
     //likes subcomponent to monitor likes easier:
@@ -39,6 +40,9 @@ const Post = ({post, setCurrentId}) => {
         dispatch(likePost(post._id));
     }
 
+    const openPost = () => {
+        history.push(`/posts/${post._id}`);
+    }
     return(
         <Card className={classes.card} raised elevation={6}>
             <CardMedia className={classes.media} title={post.title} image={post.selectedFile} />
@@ -58,7 +62,9 @@ const Post = ({post, setCurrentId}) => {
             </div>
             <Typography className={classes.title} variant="h5" gutterBottom>{post.title}</Typography>
             <CardContent>
-            <Typography variant="h6" color="textSecondary" component="p" gutterBottom>{post.message}</Typography>
+            <Button size="small" variant="outlined" className={classes.readButton} onClick={openPost}>
+            <Typography variant="subtitle2" className={classes.text}>READ POST</Typography>
+            </Button>
             </CardContent>
             <CardActions className={classes.cardActions}>
                 <Button size="small" color="primary" disabled={!user?.result} onClick={handleClickLike}>

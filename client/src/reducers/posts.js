@@ -1,4 +1,4 @@
-import {FETCH_ALL, FETCH_BY_SEARCH, CREATE, DELETE, UPDATE, LIKE, START_LOADING, END_LOADING} from '../const/actionTypes.js';
+import {FETCH_ALL, FETCH_BY_SEARCH, CREATE, DELETE, UPDATE, LIKE, START_LOADING, END_LOADING, FETCH_POST} from '../const/actionTypes.js';
 
 //in reducers, state always has to be equal to something.Empty array for the posts in this case:
 // eslint-disable-next-line import/no-anonymous-default-export
@@ -17,6 +17,8 @@ export default (state = { isLoading: true, posts: [] }, action) => {
               };//our actual posts.
         case FETCH_BY_SEARCH:
             return { ...state, posts: action.payload };
+        case FETCH_POST:
+            return { ...state, post: action.payload };
         case CREATE:
             return { ...state, posts: [...state.posts, action.payload] };//first we spread the posts,so we dont override previous data.
         case UPDATE:

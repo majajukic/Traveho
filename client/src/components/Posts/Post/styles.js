@@ -53,4 +53,15 @@ export default makeStyles({
     display: 'flex',
     justifyContent: 'space-between',
   },
+  cardAction: {
+    display: 'block',
+    textAlign: 'initial',
+  },
+  readButton: {
+    color:'rgb(63,81,181)',
+    marginTop:'10px'
+  },
+  text: {
+    color:'rgb(63,81,181)',
+  }
 });

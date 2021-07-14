@@ -5,14 +5,14 @@ import useStyles from "./styles.js";
 import { useDispatch, useSelector } from "react-redux";
 import { createPost, updatePost } from "../../actions/posts.js";
 import {defaultImage} from "../../const/defaultImage";
-//import { useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const Form = ({currentId, setCurrentId}) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   //extracting the user from a local storage:
   const user = JSON.parse(localStorage.getItem("profile"));
- // const history = useHistory();
+  const history = useHistory();
 
   //fetch a new post. Finding the post with the same id as the one we want to edit and returning it:
   const post = useSelector((state) => (currentId ? state.posts.posts.find((message) => message._id === currentId) : null));
@@ -44,10 +44,10 @@ const Form = ({currentId, setCurrentId}) => {
         if (!postData.selectedFile) {
           postData.selectedFile = defaultImage;
           
-          dispatch(createPost({...postData, name: user?.result?.name}));
+          dispatch(createPost({...postData, name: user?.result?.name}, history));
         }
         else {
-          dispatch(createPost({...postData, name: user?.result?.name}));
+          dispatch(createPost({...postData, name: user?.result?.name}, history));
         }
       }
       clear();

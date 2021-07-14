@@ -14,6 +14,7 @@ API.interceptors.request.use((req) => {
 });
 
 //API endpoints for posts:
+export const fetchPost = (id) => API.get(`/posts/${id}`);
 export const fetchPosts = (page) => API.get(`/posts?page=${page}`);//gets all the posts that we currently have in our database.
 export const fetchPostsBySearch = (searchQuery) => API.get(`/posts/search?searchQuery=${searchQuery.searchTerm || "none"}&tags=${searchQuery.tags}`);//?searchQuery is a query parameter
 export const createPost = (newPost) => API.post("/posts", newPost);//creates a post.

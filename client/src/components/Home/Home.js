@@ -30,7 +30,7 @@ const Home = () => {
     const query = useQuery();
     const history = useHistory();
     const page = query.get('page') || 1;//reads the url and detects if the page parameter is present/ if there is no page, we are on the 1st one
-    const searchQuery = query.get('searchQuery');
+    //const searchQuery = query.get('searchQuery');
 
 
     //useEffect to dispatch an action:
@@ -48,7 +48,7 @@ const Home = () => {
 
     const searchPost = () => {
         if (searchTerm.trim() || tags.length !== 0) {
-          dispatch(getPostsBySearch({ searchTerm, tags: tags.join(',') }))
+          dispatch(getPostsBySearch({ searchTerm, tags: tags.join(',') }));
           history.push(`/posts/search?searchQuery=${searchTerm || 'none'}&tags=${tags.join(',')}`);
         } else {
           history.push('/');
