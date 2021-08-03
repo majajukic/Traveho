@@ -113,9 +113,43 @@ export const commentPost = async(req, res) => {
 
     const post = await PostMessage.findById(id);
 
-    post.comments.push(value);
+    // dodajem svakom komentaru id na backendu i tako cu vracati frontendu onda kao:
+    // {
+    //     id: 2,
+    //     comment: 'neki komentar'
+    // }
+    const comment = {
+        id: post.comments.length + 1,
+        comment: value
+    } 
+
+    post.comments.push(comment);
 
     const updatedPost = await PostMessage.findByIdAndUpdate(id, post, {new: true});
 
     res.json(updatedPost);
 }
+
+export const deleteComment = async (req, res) => {
+  const { id, commentId } = req.params;
+
+  try {
+    const post = await PostMessage.findById(id);
+
+    post.comments.forEach((el, index) => {
+        if (+el.id === +commentId) {
+            post.comments.splice(index, 1);
+        }
+    })
+
+    post.save();
+    
+    const updatedPost = await PostMessage.findByIdAndUpdate(id, post, {
+      new: true,
+    });
+
+    res.json(updatedPost);
+  } catch (error) {
+    res.status(409).json({message: error.message});
+  }
+};
