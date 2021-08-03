@@ -1,7 +1,7 @@
 import express from 'express';
 /*since we are exporting more elements than one (not as default), we need a set of curly braces 
 and we can use different syntax in those files for exporting*/
-import {getPosts, getPost, getPostsBySearch, createPost, updatePost, deletePost, likePost, commentPost} from '../controllers/posts.js';
+import {getPosts, getPost, getPostsBySearch, createPost, updatePost, deletePost, likePost, commentPost, deleteComment} from '../controllers/posts.js';
 import auth from '../middleware/auth.js';
 
 //Setting up the router:
@@ -17,5 +17,6 @@ router.patch("/:id", auth, updatePost);//a dynamic id to know what exactly to de
 router.delete("/:id", auth, deletePost);
 router.patch("/:id/likePost", auth, likePost);
 router.post("/:id/commentPost", auth, commentPost);//patch request is a request for editing/changing sometnig. Only one like per user.
+router.delete("/:id/deleteComment/:commentId", auth, deleteComment);
 
 export default router;

@@ -2,7 +2,7 @@ import React, {useState, useRef} from 'react';
 import {Typography, TextField, Button, Card, Grid} from '@material-ui/core';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import {useDispatch} from 'react-redux';
-import {commentPost} from '../../actions/posts.js';
+import {commentPost, deleteComment} from '../../actions/posts.js';
 import useStyles from './styles.js';
 
 const CommentSection = ({post}) => {
@@ -24,8 +24,10 @@ const CommentSection = ({post}) => {
          commentsRef.current.scrollIntoView({behavior: "smooth"});
     }
 
-    const handleDelete = () => {
+    const handleDelete = async (c) => {
+        const newComments = await dispatch(deleteComment(c.id, post._id));
 
+        setComments(newComments);
     }
 
     return (
@@ -34,14 +36,14 @@ const CommentSection = ({post}) => {
                 <div className={classes.commentsInnerContainer}>
                     <Typography gutterBottom variant="h6">Comments</Typography>
                     {comments.map((c, i) => (
-                     <Grid container direction="row" alignItems="center">
+                     <Grid key={i} container direction="row" alignItems="center">
                         <Card className={classes.cardContent}>
-                            <Typography key={i} gutterBottom variant="subtitle1">
-                                    <strong>{c.split(": ")[0]}</strong>
-                                    {c.split(":")[1]}
+                            <Typography gutterBottom variant="subtitle1">
+                                    <strong>{c.comment.split(": ")[0]}</strong>
+                                    {c.comment.split(":")[1]}
                             </Typography>
-                            {user?.result?.name === c.split(": ")[0] && (
-                                <Button size="small" color="primary" className={classes.removeButton} onClick={handleDelete}>
+                            {user?.result?.name === c.comment.split(": ")[0] && (
+                                <Button size="small" color="primary" className={classes.removeButton} onClick={() => handleDelete(c)}>
                                         <HighlightOffIcon fontSize="medium"/>
                                 </Button>
                             )}
