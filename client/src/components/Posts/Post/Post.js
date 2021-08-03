@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {useState} from 'react';
 import useStyles from './styles.js';
-import{Card, CardActions, CardContent, CardMedia, Button, Typography, ButtonBase} from '@material-ui/core';
+import{Card, CardActions, CardContent, CardMedia, Button, Typography} from '@material-ui/core';
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import ThumbUpAltOutlined from '@material-ui/icons/ThumbUpAltOutlined';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -71,7 +71,7 @@ const Post = ({post, setCurrentId}) => {
                     <Likes />
                 </Button>
                 {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator || user?.result?.role === 'admin') && (
-                    <Button size="small" color="primary" onClick={handleClickDelete}>
+                <Button size="small" color="primary" onClick={handleClickDelete}>
                     <DeleteIcon fontSize="large" />
                 </Button>
                 )}

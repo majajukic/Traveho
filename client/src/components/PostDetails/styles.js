@@ -4,8 +4,14 @@ export default makeStyles((theme) => ({
   media: {
     borderRadius: '20px',
     objectFit: 'cover',
-    width:'100%',
-    height:'350px'
+    [theme.breakpoints.up('md')]: {
+    width:'500px',
+    height:'300px'
+    },
+    [theme.breakpoints.down('sm')]: {
+      width: '100%',
+      maxHeight: '600px'
+    }
   },
   card: {
     display: 'flex',
@@ -18,6 +24,9 @@ export default makeStyles((theme) => ({
   section: {
     borderRadius: '20px',
     margin: '10px',
+    [theme.breakpoints.down('sm')]: {
+      marginBottom:"30px"
+    },
     flex: 1,
   },
   imageSection: {
@@ -53,9 +62,24 @@ export default makeStyles((theme) => ({
     marginLeft:"40px",
     marginRight:"40px"
 },
-  suggested: {
+suggested: {
     width:"200px",
     height:"150px",
     borderRadius:"20px"
-  }
+  },
+commentsOuterContainer: {
+  display:"flex",
+  justifyContent: "space-between",
+  [theme.breakpoints.down('sm')]: {
+    flexDirection: 'column',
+  },
+},
+commentsInnerContainer: {
+  height:"200px",
+  overflowY:"auto",//scroll
+  marginRight:"30px"
+},
+removeButton: {
+  justifyContent:"left",
+}
 }));

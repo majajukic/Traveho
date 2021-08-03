@@ -4,7 +4,7 @@ import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
 import { useParams, useHistory } from 'react-router-dom';
-
+import CommentSection from './CommentSection';
 import { getPost, getPostsBySearch } from '../../actions/posts';
 import useStyles from './styles';
 
@@ -50,7 +50,7 @@ const PostDetails = () => {
           <Typography variant="h6">Created by: {post.name}</Typography>
           <Typography variant="body1">{moment(post.createdAt).fromNow()}</Typography>
           <Divider className={classes.devider} />
-          <Typography variant="body1"><strong>Comments - coming soon!</strong></Typography>
+          <CommentSection post={post} />
           <Divider className={classes.devider} />
         </div>
         <div className={classes.imageSection}>
@@ -59,10 +59,9 @@ const PostDetails = () => {
       </div>
       {recommendedPosts && (
         <div className={classes.section}>
-        <Typography gutterBottom variant={"h5"}>{ recommendedPosts.length ? "You might also like:" : "No suggestions found." }</Typography>
-        <Divider />
+        <Typography gutterBottom variant="h5">{ recommendedPosts.length ? "You might also like:" : "No suggestions found." }</Typography>
         <div className={classes.recommendedPosts}>
-        {recommendedPosts.map(({ title, name, message, likes, selectedFile, _id }) => (
+        {recommendedPosts.map(({ title, name, likes, selectedFile, _id }) => (
               <div style={{ margin: '20px', cursor: 'pointer' }} onClick={() => openPost(_id)} key={_id}>
                 <Typography gutterBottom variant="h6">{title}</Typography>
                 <Typography gutterBottom variant="subtitle2">{name}</Typography>

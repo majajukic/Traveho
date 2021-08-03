@@ -1,4 +1,4 @@
-import {FETCH_ALL, FETCH_BY_SEARCH, CREATE, DELETE, UPDATE, LIKE, START_LOADING, END_LOADING, FETCH_POST} from '../const/actionTypes.js';
+import {FETCH_ALL, FETCH_BY_SEARCH, CREATE, DELETE, UPDATE, LIKE, START_LOADING, END_LOADING, FETCH_POST, COMMENT} from '../const/actionTypes.js';
 
 //in reducers, state always has to be equal to something.Empty array for the posts in this case:
 // eslint-disable-next-line import/no-anonymous-default-export
@@ -27,6 +27,13 @@ export default (state = { isLoading: true, posts: [] }, action) => {
             return { ...state, posts: state.posts.filter((post) => post._id !== action.payload) };
         case LIKE:
             return { ...state, posts: state.posts.map((post) => (post._id === action.payload._id ? action.payload : post)) };//we look through for a post that changed (action.payload) and return it
+        case COMMENT:
+            return {...state, posts: state.posts.map((post) => {
+                if(post._id === action.payload._id) {
+                    return action.payload;
+                }
+                return post;
+            })};
         default:
                 return state;
     }
