@@ -1,5 +1,5 @@
 import React, {useState, useRef} from 'react';
-import {Typography, TextField, Button, Grid, Divider, emphasize} from '@material-ui/core';
+import {Typography, TextField, Button, Card, Grid} from '@material-ui/core';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import {useDispatch} from 'react-redux';
 import {commentPost} from '../../actions/posts.js';
@@ -9,7 +9,7 @@ const CommentSection = ({post}) => {
     const classes = useStyles();
     const [comments, setComments] = useState(post?.comments);
     const [comment, setComment] = useState("");
-    const [isDeleted, setDeleted] = useState(false);
+    //const [isDeleted, setDeleted] = useState(false);
     const dispatch = useDispatch();
     const user = JSON.parse(localStorage.getItem("profile"));
     const commentsRef = useRef();
@@ -24,22 +24,29 @@ const CommentSection = ({post}) => {
          commentsRef.current.scrollIntoView({behavior: "smooth"});
     }
 
+    const handleDelete = () => {
+
+    }
+
     return (
         <div>
             <div className={classes.commentsOuterContainer}>
                 <div className={classes.commentsInnerContainer}>
                     <Typography gutterBottom variant="h6">Comments</Typography>
                     {comments.map((c, i) => (
+                     <Grid container direction="row" alignItems="center">
+                        <Card className={classes.cardContent}>
                             <Typography key={i} gutterBottom variant="subtitle1">
-                                <strong>{c.split(": ")[0]}</strong>
-                                {c.split(":")[1]}
+                                    <strong>{c.split(": ")[0]}</strong>
+                                    {c.split(":")[1]}
                             </Typography>
-                            /*{user?.result?.name === c.split(": ")[0] && (
-                               <Button size="small" color="primary" className={classes.removeButton} onClick={handleDelete}>
-                                    <HighlightOffIcon fontSize="medium"/>
+                            {user?.result?.name === c.split(": ")[0] && (
+                                <Button size="small" color="primary" className={classes.removeButton} onClick={handleDelete}>
+                                        <HighlightOffIcon fontSize="medium"/>
                                 </Button>
                             )}
-                        </Grid>*/
+                        </Card>
+                    </Grid>
                     ))}
                     <div ref={commentsRef} />
                 </div>

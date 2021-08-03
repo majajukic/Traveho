@@ -81,5 +81,9 @@ commentsInnerContainer: {
 },
 removeButton: {
   justifyContent:"left",
+},
+cardContent: {
+  width: "100%",
+  padding: "5px"
 }
 }));
