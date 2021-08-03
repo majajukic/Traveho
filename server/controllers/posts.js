@@ -137,6 +137,7 @@ export const deleteComment = async (req, res) => {
     const post = await PostMessage.findById(id);
 
     post.comments.forEach((el, index) => {
+        //konvertuje string id u broj
         if (+el.id === +commentId) {
             post.comments.splice(index, 1);
         }

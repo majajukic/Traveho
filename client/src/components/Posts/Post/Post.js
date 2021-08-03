@@ -70,7 +70,7 @@ const Post = ({post, setCurrentId}) => {
                 <Button size="small" color="primary" disabled={!user?.result} onClick={handleClickLike}>
                     <Likes />
                 </Button>
-                {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator || user?.result?.role === 'admin') && (
+                {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator || user?.result?.role === "admin") && (
                 <Button size="small" color="primary" onClick={handleClickDelete}>
                     <DeleteIcon fontSize="large" />
                 </Button>

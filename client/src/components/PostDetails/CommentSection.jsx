@@ -25,9 +25,12 @@ const CommentSection = ({post}) => {
     }
 
     const handleDelete = async (c) => {
-        const newComments = await dispatch(deleteComment(c.id, post._id));
+        if(window.confirm('Are you sure you want to delete this comment?')) {
+            const newComments = await dispatch(deleteComment(c.id, post._id));
 
-        setComments(newComments);
+            setComments(newComments);
+        }
+        
     }
 
     return (
@@ -35,7 +38,8 @@ const CommentSection = ({post}) => {
             <div className={classes.commentsOuterContainer}>
                 <div className={classes.commentsInnerContainer}>
                     <Typography gutterBottom variant="h6">Comments</Typography>
-                    {comments.map((c, i) => (
+                    {comments.length === 0 ? <Typography>No comments yet.</Typography> :
+                     comments.map((c, i) => (
                      <Grid key={i} container direction="row" alignItems="center">
                         <Card className={classes.cardContent}>
                             <Typography gutterBottom variant="subtitle1">
@@ -43,6 +47,11 @@ const CommentSection = ({post}) => {
                                     {c.comment.split(":")[1]}
                             </Typography>
                             {user?.result?.name === c.comment.split(": ")[0] && (
+                                <Button size="small" color="primary" className={classes.removeButton} onClick={() => handleDelete(c)}>
+                                        <HighlightOffIcon fontSize="medium"/>
+                                </Button>
+                            )}
+                            {user?.result?.role === "admin" && (
                                 <Button size="small" color="primary" className={classes.removeButton} onClick={() => handleDelete(c)}>
                                         <HighlightOffIcon fontSize="medium"/>
                                 </Button>
