@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {useDispatch} from 'react-redux';
 import useStyles from './styles.js';
-import {AppBar, Toolbar, Typography, Button, Avatar} from '@material-ui/core';
+import {AppBar, Toolbar, Typography, Button, Avatar, Tabs, Tab} from '@material-ui/core';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import {Link, useHistory, useLocation} from 'react-router-dom';
 import decode from 'jwt-decode';
@@ -58,6 +58,9 @@ export default function Header() {
         <AppBar position="fixed">
           <Toolbar>
             <Typography variant="h5" className={classes.title} component={Link} to="/" onMouseOver={changeColor} onMouseLeave={resetColor}>Traveho</Typography>
+            <Tabs value={0} TabIndicatorProps={{style:{display:"none"}}}>
+              <Tab label="About" className={classes.tab} component={Link} to="/about"/>
+            </Tabs>
             {user ? (
               <div className={classes.profile}>
                 {user?.result?.role === 'admin' ? <AccountCircleIcon fontSize="large" /> : <Avatar style={{backgroundColor:'#7c5ee0'}}>{user.result.name.charAt(0)}</Avatar>}

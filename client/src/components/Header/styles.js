@@ -16,7 +16,8 @@ export default makeStyles((theme) => ({
         },
         link: {
           textDecoration:'none',
-          marginRight:'50px'
+          marginRight:'50px',
+          color:"white"
         },
         toolbar: {
           display: 'flex',
@@ -28,5 +29,8 @@ export default makeStyles((theme) => ({
           justifyContent: 'space-between',
           width: '170px',
           marginRight:'10px'
+        },
+        tab: {
+          marginRight:"3px"
         }
     }));

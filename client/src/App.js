@@ -5,6 +5,7 @@ import Home from './components/Home/Home.js';
 import ErrorPage from './components/ErrorPage/ErrorPage.js';
 import Footer from './components/Footer/Footer.js';
 import Auth from './components/Auth/Auth.js';
+import About from './components/About/About.js';
 import PostDetails from './components/PostDetails/PostDetails.jsx';
 
 const App = () => {
@@ -18,6 +19,7 @@ const App = () => {
                 <Route path="/posts/search" exact component={Home} />
                 <Route path="/posts/:id" component={PostDetails} />
                 <Route path="/auth" exact component={Auth} />
+                <Route path="/about" exact component={About} />
                 <Route path="*" exact component={ErrorPage} />
             </Switch>
             <Footer />
