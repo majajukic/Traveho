@@ -13,6 +13,7 @@ export default function Header() {
     const history = useHistory();
     const location = useLocation();
     const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+    const [isClicked, setClicked] = useState(false);
     
     //console.log(user);
 
@@ -59,7 +60,7 @@ export default function Header() {
           <Toolbar>
             <Typography variant="h5" className={classes.title} component={Link} to="/" onMouseOver={changeColor} onMouseLeave={resetColor}>Traveho</Typography>
             <Tabs value={0} TabIndicatorProps={{style:{display:"none"}}}>
-              <Tab label="About" className={classes.tab} component={Link} to="/about"/>
+              <Tab label="About" className={classes.tab} component={Link} to="/about" />
             </Tabs>
             {user ? (
               <div className={classes.profile}>
