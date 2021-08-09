@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Typography, Card, CardMedia, CardContent, Container, Button, Grow, Link} from '@material-ui/core';
+import { Grid, Typography, Card, CardMedia, CardContent, Container, Button, Grow} from '@material-ui/core';
 import useStyles from './styles.js';
 import sunset from './images/sunset.jpg';
 import collaboration from './images/collaboration.png';
@@ -8,6 +8,7 @@ import luggage from './images/luggage.png';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import InstagramIcon from '@material-ui/icons/Instagram';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
+import {Link} from 'react-router-dom';
 
 const About = () => {
     const classes = useStyles();

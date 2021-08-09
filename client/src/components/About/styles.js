@@ -60,7 +60,7 @@ export default makeStyles((theme) => ({
     button: {
         backgroundColor:"#3d16db",
         color:"white",
-        marginTop:"10px"
+        marginTop:"10px",
     },
     thirdSection: {
         marginTop:"30px"
