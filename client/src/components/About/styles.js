@@ -70,7 +70,7 @@ export default makeStyles((theme) => ({
     },
     callToAction: {
         [theme.breakpoints.down('sm')]: {
-            width: '100%',
-        },
+            width: "100%",
+        }
     }
 }));

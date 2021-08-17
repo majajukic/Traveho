@@ -9,7 +9,6 @@ const CommentSection = ({post}) => {
     const classes = useStyles();
     const [comments, setComments] = useState(post?.comments);
     const [comment, setComment] = useState("");
-    //const [isDeleted, setDeleted] = useState(false);
     const dispatch = useDispatch();
     const user = JSON.parse(localStorage.getItem("profile"));
     const commentsRef = useRef();
@@ -72,6 +71,7 @@ const CommentSection = ({post}) => {
                         multiline
                         value={comment}
                         onChange={(e) => setComment(e.target.value)}
+                        required
                     />
                     <Button style={{marginTop:"10px", backgroundColor:"#3f51b5", color:"white"}} fullWidth disabled={!comment} variant="contained" onClick={handleClick}>COMMENT</Button>
                 </div>

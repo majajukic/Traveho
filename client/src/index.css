@@ -4,7 +4,7 @@ body {
     margin: 0
     /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
 }
-/*targetus the text beside 'choose a file button' to make it invisible once the user clicks clear.*/
+/*targets the text beside 'choose a file button' to make it invisible once the user clicks clear.*/
 input[type="file"] {
     width: 100%;
     color: transparent;
