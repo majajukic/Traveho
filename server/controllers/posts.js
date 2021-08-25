@@ -1,5 +1,3 @@
-/*inside of this folder we are creating all the handlers for our routes. Inside routes/posts.js we dont't want logic
-because we are going to get lost eventually. So, in here, we can extract all the logic from our routes.*/
 import PostMessage from '../models/postMessage.js';
 import mongoose from 'mongoose';
 
@@ -52,7 +50,7 @@ export const createPost = async (req, res) => {
     try {
         await newPostMessage.save();
 
-        res.status(201).json(newPostMessage);//201, creation went okay.
+        res.status(201).json(newPostMessage);
     } catch (error) {
         res.status(409).json({message: error.message});
     }

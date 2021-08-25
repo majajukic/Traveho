@@ -29,5 +29,5 @@ const postSchema = mongoose.Schema({
 
 //Converting a schema into a model:
 const PostMessage = mongoose.model('PostMessage', postSchema);
-//exporting a mongoose model from postMessage file and on that model we will be able to run ocmmands(find, delete,..)
+
 export default PostMessage;

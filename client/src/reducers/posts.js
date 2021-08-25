@@ -22,7 +22,7 @@ export default (state = { isLoading: true, posts: [] }, action) => {
         case CREATE:
             return { ...state, posts: [...state.posts, action.payload] };//first we spread the posts,so we dont override previous data.
         case UPDATE:
-            return { ...state, posts: state.posts.map((post) => (post._id === action.payload._id ? action.payload : post)) };//output of map is an array!
+            return { ...state, posts: state.posts.map((post) => (post._id === action.payload._id ? action.payload : post)) };//output of map is an array that checks if the id is same as the id of the updated post.
         case DELETE:
             return { ...state, posts: state.posts.filter((post) => post._id !== action.payload) };
         case LIKE:

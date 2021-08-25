@@ -5,7 +5,7 @@ import Post from './Post/Post.js';
 import useStyles from './styles.js';
 
 const Posts = ({setCurrentId}) => {
-    const { posts, isLoading } = useSelector((state) => state.posts);
+    const { posts, isLoading } = useSelector((state) => state.posts);//extracting state of posts and loading state from Redux store
     const classes = useStyles();
     //console.log(posts);
 

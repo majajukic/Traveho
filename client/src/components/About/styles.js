@@ -1,5 +1,5 @@
 import {makeStyles} from '@material-ui/core/styles';
-import { FormatAlignJustify } from '@material-ui/icons';
+import { CenterFocusStrong, FormatAlignJustify } from '@material-ui/icons';
 
 export default makeStyles((theme) => ({
     sunsetImage: {
@@ -19,6 +19,7 @@ export default makeStyles((theme) => ({
         marginTop:"130px",
         [theme.breakpoints.down('sm')]: {
             marginTop:"0",
+            textAlign: "center"
           },
     },
     firstSection: {
@@ -43,13 +44,19 @@ export default makeStyles((theme) => ({
         border: "none",
         boxShadow:"none",
         justifyContent:"center",
-        padding:"20px"
+        padding:"20px",
         
     },
     cardGrid: {
         padding: "20px 0",
         marginTop:"60px",
         justifyContent:"space-between",
+        [theme.breakpoints.down('sm')]: {
+            dispaly: "flex",
+            flexDirection: "column",
+            justifyContent:"center",
+            alignItems:"center",
+          },
     },
     cardContent: {
         flexGrow: 1,
@@ -71,6 +78,7 @@ export default makeStyles((theme) => ({
     callToAction: {
         [theme.breakpoints.down('sm')]: {
             width: "100%",
+            textAlign: "center"
         }
     }
 }));
