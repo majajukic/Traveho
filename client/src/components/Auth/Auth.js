@@ -9,7 +9,7 @@ import Icon from './icon.js'
 import useStyles from './styles.js';
 import {signin, signup} from '../../actions/auth';
 
-//inicial state object:
+//inicial state object for formData state Hook:
 const initialState = {
     firstName: "",
     lastName: "",
@@ -35,7 +35,7 @@ const Auth = () => {
     }
 
     const handleSubmit = (e) => {
-        //always add this to form submit in React to avoid reloads of the page.
+        //avoids reloads of the page.
         e.preventDefault();
 
         //two types of submits:sign in or sign up:

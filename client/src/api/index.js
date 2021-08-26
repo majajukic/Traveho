@@ -3,13 +3,13 @@ import axios from 'axios';
 //instance of axios that makes calls to different backend routes:
 const API = axios.create({ baseURL:"http://localhost:5000" });
 
-//a function that happens on each of the requests
+//a function that happens on each of the requests. This is a must because of middleware!
 API.interceptors.request.use((req) => {
     //sending token back to the backend to verify if we are logged in:
     if(localStorage.getItem("profile")) {
         req.headers.authorization  = `Bearer ${JSON.parse(localStorage.getItem("profile")).token}`;
     }
-    //a must for interceptors! - to make it possible to make all the requests below!
+    //sending token to the backend:
     return req;
 });
 

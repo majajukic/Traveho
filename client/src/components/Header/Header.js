@@ -13,9 +13,6 @@ export default function Header() {
     const history = useHistory();
     const location = useLocation();
     const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
-    const [isClicked, setClicked] = useState(false);
-    
-    //console.log(user);
 
     const logout = () => {
       dispatch({type: "LOGOUT"});
@@ -27,14 +24,12 @@ export default function Header() {
 
     }
 
-    //By using this Hook, you tell React that your component needs to do something after render
     useEffect(() => {
       const token = user?.token;
 
       if(token) {
         const decodedToken = decode(token);
 
-        //time in miliseconds
         if(decodedToken.exp * 1000 < new Date().getTime()) {
           logout();
         }

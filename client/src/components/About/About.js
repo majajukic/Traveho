@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Typography, Card, CardMedia, CardContent, Container, Button, Grow} from '@material-ui/core';
+import { Grid, Typography, Card, CardMedia, CardContent, Container, Button, Grow, Link} from '@material-ui/core';
 import useStyles from './styles.js';
 import sunset from './images/sunset.jpg';
 import collaboration from './images/collaboration.png';
@@ -8,7 +8,7 @@ import luggage from './images/luggage.png';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import InstagramIcon from '@material-ui/icons/Instagram';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
-import {Link} from 'react-router-dom';
+import {Link as link} from 'react-router-dom';
 
 const About = () => {
     const classes = useStyles();
@@ -67,7 +67,7 @@ const About = () => {
                                 <Typography variant="h4" className={classes.callToAction}>Find the perfect trip today!</Typography>
                             </Grid>
                             <Grid item>
-                                <Button component={Link} to="/auth" className={classes.button} variant="contained" size="large">Sign up</Button>
+                                <Button component={link} to="/auth" className={classes.button} variant="contained" size="large">Sign up</Button>
                             </Grid>
                         </Grid>
                     </Container>

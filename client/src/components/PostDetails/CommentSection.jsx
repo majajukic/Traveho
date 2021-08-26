@@ -45,16 +45,11 @@ const CommentSection = ({post}) => {
                                     <strong>{c.comment.split(": ")[0]}</strong>
                                     {c.comment.split(":")[1]}
                             </Typography>
-                            {user?.result?.name === c.comment.split(": ")[0] && (
+                            {user?.result?.name === c.comment.split(": ")[0] || user?.result?.role === "admin" ? (
                                 <Button size="small" color="primary" className={classes.removeButton} onClick={() => handleDelete(c)}>
                                         <HighlightOffIcon fontSize="medium"/>
                                 </Button>
-                            )}
-                            {user?.result?.role === "admin" && (
-                                <Button size="small" color="primary" className={classes.removeButton} onClick={() => handleDelete(c)}>
-                                        <HighlightOffIcon fontSize="medium"/>
-                                </Button>
-                            )}
+                            ) : null}
                         </Card>
                     </Grid>
                     ))}
