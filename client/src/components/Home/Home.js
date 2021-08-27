@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {useDispatch} from 'react-redux';//to dispatch an action - this is a hook.
-import { useHistory, useLocation } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';//location to know which page is active
 import {Container, Grow, Grid, Paper, AppBar, TextField, Button,} from '@material-ui/core';
 import {getPostsBySearch} from '../../actions/posts.js';
 import ChipInput from 'material-ui-chip-input';//formats the inputs into chips
@@ -9,9 +9,9 @@ import Form from '../Form/Form.js';
 import useStyles from './styles.js';
 import Paginate from '../Pagination/Pagination.jsx';
 
-//use this function as a hook:
+//custom hook:
 function useQuery () {
-    return new URLSearchParams(useLocation().search);
+    return new URLSearchParams(useLocation().search);//on which page we are on and what is the term we are looking for
 
 }
 
@@ -30,13 +30,7 @@ const Home = () => {
     const query = useQuery();
     const history = useHistory();
     const page = query.get('page') || 1;//reads the url and detects if the page parameter is present/ if there is no page, we are on the 1st one
-    //const searchQuery = query.get('searchQuery');
-
-
-    //useEffect to dispatch an action:
-    /*useEffect(() => {
-        dispatch(getPosts());
-    }, [currentId, dispatch]);*/
+    const searchQuery = query.get('searchQuery');
 
     const handleAdd = (tag) => {
         setTags([...tags, tag]);
@@ -57,14 +51,13 @@ const Home = () => {
     
     return (
         <>
-        <Container maxWidth="xl">
         <Grow in>
-            <Container>
-                <Grid className={classes.mainContainer} container justifyContent="space-between" alignItems="stretch" spacing={3}>
+            <Container maxWidth="xl">
+                <Grid className={classes.mainContainer} container justifyContent="space-evenly" alignItems="stretch">
                     <Grid item xs={12} md={8} sm={6}>
                         <Posts setCurrentId={setCurrentId} />
                     </Grid>
-                    <Grid item xs={12} md={4} sm={6}>
+                    <Grid item xs={12} md={3} sm={6}>
                         <AppBar className={classes.appBarSearch} position="static" color="inherit">
                             <TextField 
                                 name="search"
@@ -87,14 +80,15 @@ const Home = () => {
                             <Button onClick={searchPost} className={classes.searchButton} variant="contained">Search</Button>
                         </AppBar>
                         <Form currentId={currentId} setCurrentId={setCurrentId}/>
-                        <Paper elevation={6} className={classes.pagination}>
-                            <Paginate page={page} />
-                        </Paper>
+                        {(!searchQuery && !tags.length) && (
+                            <Paper className={classes.pagination} elevation={6}>
+                                <Paginate page={page} />
+                            </Paper>
+                        )}
                     </Grid>
                 </Grid>
             </Container>
         </Grow>
-        </Container>
         </>
     )
 }

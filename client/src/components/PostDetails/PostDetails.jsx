@@ -18,13 +18,13 @@ const PostDetails = () => {
   //there can be multiple useEffects in one functional component
   useEffect(() => {
     dispatch(getPost(id));
-  }, [id]);
+  }, [dispatch, id]);
 
   useEffect(() => {
     if (post) {
       dispatch(getPostsBySearch({ search: 'none', tags: post?.tags.join(',') }));//recommended by tags
     }
-  }, [post]);
+  }, [dispatch, post]);
 
   if (!post) return null;
 
@@ -59,7 +59,7 @@ const PostDetails = () => {
       </div>
       {recommendedPosts && (
         <div className={classes.section}>
-        <Typography gutterBottom variant="h5">{ recommendedPosts.length ? "You might also like:" : "No suggestions found." }</Typography>
+        <Typography className={classes.text} gutterBottom variant="h5">{ recommendedPosts.length !== 0 ? "You might also like:" : "No suggestions found." }</Typography>
         <div className={classes.recommendedPosts}>
         {recommendedPosts.map(({ title, name, likes, selectedFile, _id }) => (
               <div style={{ margin: '20px', cursor: 'pointer' }} onClick={() => openPost(_id)} key={_id}>

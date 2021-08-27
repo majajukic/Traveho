@@ -3,7 +3,7 @@ import {makeStyles} from '@material-ui/core';
 export default makeStyles((theme) =>({
     appBarSearch: {
         borderRadius: 4,
-        marginTop:'6.75rem',
+        marginTop:'105px',
         display: 'flex',
         padding: '16px',
       },

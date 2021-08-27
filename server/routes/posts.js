@@ -16,7 +16,7 @@ router.post("/", auth, createPost);//you need to be logged in to create a post
 router.patch("/:id", auth, updatePost);//a dynamic id to know what exactly to delete.
 router.delete("/:id", auth, deletePost);
 router.patch("/:id/likePost", auth, likePost);
-router.post("/:id/commentPost", auth, commentPost);//patch request is a request for editing/changing sometnig. Only one like per user.
+router.post("/:id/commentPost", auth, commentPost);
 router.delete("/:id/deleteComment/:commentId", auth, deleteComment);
 
 export default router;

@@ -55,6 +55,11 @@ export default makeStyles((theme) => ({
   devider: {
     margin: '20px 0' 
   },
+  text: {
+    [theme.breakpoints.down('sm')]: {
+      marginTop: '25px',
+    },
+  },
   paper: {
     padding: "40px", 
     borderRadius: "15px",
@@ -84,6 +89,7 @@ removeButton: {
 },
 cardContent: {
   width: "100%",
-  padding: "5px"
+  padding: "5px",
+  marginBottom: "10px"
 }
 }));

@@ -35,7 +35,7 @@ export const getPostsBySearch = async (req, res) => {
     try {
         const title = new RegExp(searchQuery, "i");//i stands for ignore casing / Regular expression for easier DB search
 
-        const posts = await PostMessage.find({ $or: [ { title }, { tags: { $in: tags.split(',') } } ]});//match by title and tags
+        const posts = await PostMessage.find({ $or: [ { title }, { tags: { $in: tags.split(',') } } ]});//match by title and/or tags
         res.json({ data: posts });
     } catch (error) {    
         res.status(404).json({ message: error.message });

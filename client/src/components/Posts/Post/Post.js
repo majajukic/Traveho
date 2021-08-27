@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import useStyles from './styles.js';
 import{Card, CardActions, CardContent, CardMedia, Button, Typography} from '@material-ui/core';
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
@@ -31,9 +31,10 @@ const Post = ({post, setCurrentId}) => {
     };
 
     const handleClickDelete = () => {
-        if(window.confirm('Are you sure you want to delete this item?'))
+        if(window.confirm("Are you sure you want to delete this item?")) {
             dispatch(deletePost(post._id));
-
+            history.push("/");
+        }
     }
 
     const handleClickLike = () => {

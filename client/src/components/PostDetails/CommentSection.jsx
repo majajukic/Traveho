@@ -40,7 +40,7 @@ const CommentSection = ({post}) => {
                     {comments.length === 0 ? <Typography>No comments yet.</Typography> :
                      comments.map((c, i) => (
                      <Grid key={i} container direction="row" alignItems="center">
-                        <Card className={classes.cardContent}>
+                        <Card className={classes.cardContent} elevation={0}>
                             <Typography gutterBottom variant="subtitle1">
                                     <strong>{c.comment.split(": ")[0]}</strong>
                                     {c.comment.split(":")[1]}
